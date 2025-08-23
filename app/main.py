@@ -23,11 +23,11 @@ app.include_router(admin.router, prefix="/admin", tags=["admin"])
 async def startup_event():
     # log insecure default password (already logged in config) but repeat for clarity
     if settings.DEFAULT_ADMIN_PASSWORD:
-        logger.warning("DEFAULT_ADMIN_PASSWORD is hard-coded. This is insecure by design for this project.")
-from fastapi import FastAPI
+        logger.warning(
+            "DEFAULT_ADMIN_PASSWORD is hard-coded. This is insecure by design for this project."
+        )
 
-app = FastAPI(title="OpenAgent")
 
 @app.get("/")
 def root():
-    return {"message": "Welcome to OpenAgent API"}
+    return {"message": "Welcome to RAG Chat Bubble Service API"}
