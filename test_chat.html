@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Bubble Test Page</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .content {
+            margin-bottom: 50px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .section h2 {
+            margin-top: 0;
+            color: #fff;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status.connected {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.disconnected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .chat-bubble-placeholder {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            margin: 20px 0;
+        }
+
+        .loading {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .error {
+            background: rgba(255, 107, 107, 0.2);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            color: #ff6b6b;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 RAG Chat Bubble Test</h1>
+
+        <div class="content">
+            <div class="section">
+                <h2>📊 Server Status</h2>
+                <div id="status">
+                    <div class="loading">🔄 Checking server connection...</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>💬 Chat Bubble</h2>
+                <div class="chat-bubble-placeholder" id="chat-placeholder">
+                    <div class="loading">🔄 Loading chat bubble...</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📝 Test Instructions</h2>
+                <ol style="color: rgba(255, 255, 255, 0.9);">
+                    <li>Make sure your FastAPI server is running on <code>localhost:8000</code></li>
+                    <li>Click the chat button in the bottom-right corner</li>
+                    <li>Try asking questions to test the conversation memory</li>
+                    <li>Use the menu (⋮) to manage your conversation</li>
+                    <li>Test different sessions and conversation history</li>
+                </ol>
+            </div>
+
+            <div class="section">
+                <h2>🔧 Quick Actions</h2>
+                <a href="http://localhost:8000/admin/ui" class="btn" target="_blank">🛠️ Admin Panel</a>
+                <a href="http://localhost:8000/docs" class="btn" target="_blank">📚 API Docs</a>
+                <a href="http://localhost:8000/health" class="btn" target="_blank">❤️ Health Check</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error handling and chat bubble loading -->
+    <script>
+        // Check server status
+        async function checkServerStatus() {
+            try {
+                const response = await fetch('http://localhost:8000/health');
+                const data = await response.json();
+
+                const statusDiv = document.getElementById('status');
+                if (response.ok) {
+                    statusDiv.innerHTML = `
+                        <div class="status connected">✅ Server Connected</div>
+                        <p>AI Available: ${data.ai_available ? '✅' : '❌'}</p>
+                        <p>Status: ${data.status}</p>
+                    `;
+                    return true;
+                } else {
+                    statusDiv.innerHTML = `
+                        <div class="status disconnected">❌ Server Error</div>
+                        <p>Status: ${response.status}</p>
+                    `;
+                    return false;
+                }
+            } catch (error) {
+                const statusDiv = document.getElementById('status');
+                statusDiv.innerHTML = `
+                    <div class="status disconnected">❌ Connection Failed</div>
+                    <p>Error: ${error.message}</p>
+                    <p>Make sure your FastAPI server is running on localhost:8000</p>
+                `;
+                return false;
+            }
+        }
+
+        // Load chat bubble
+        async function loadChatBubble() {
+            try {
+                const response = await fetch('http://localhost:8000/chat/bubble');
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Insert the chat bubble HTML into the page
+                    document.body.insertAdjacentHTML('beforeend', data.html);
+
+                    const placeholder = document.getElementById('chat-placeholder');
+                    placeholder.innerHTML = '<div class="status connected">✅ Chat bubble loaded successfully!</div>';
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${data.detail || 'Unknown error'}`);
+                }
+            } catch (error) {
+                const placeholder = document.getElementById('chat-placeholder');
+                placeholder.innerHTML = `
+                    <div class="error">
+                        <strong>Failed to load chat bubble:</strong><br>
+                        ${error.message}<br><br>
+                        Make sure your FastAPI server is running and accessible at localhost:8000
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize when page loads
+        window.addEventListener('DOMContentLoaded', async function() {
+            const serverConnected = await checkServerStatus();
+            if (serverConnected) {
+                await loadChatBubble();
+            }
+        });
+
+        // Auto-refresh status every 30 seconds
+        setInterval(checkServerStatus, 30000);
+    </script>
+</body>
+</html>
