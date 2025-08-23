@@ -290,3 +290,26 @@ Guidelines:
 
 
 ai_service = AIService()
+
+
+def initialize_qdrant_integration():
+    """Initialize integration between AI service and Qdrant service."""
+    try:
+        from app.services.qdrant_service import qdrant_service
+
+        # Get the ai_service instance from the module level
+        import sys
+
+        current_module = sys.modules[__name__]
+        ai_service_instance = getattr(current_module, "ai_service", None)
+        if ai_service_instance:
+            qdrant_service.set_ai_service(ai_service_instance)
+            logger.info("Qdrant-AI service integration initialized")
+        else:
+            logger.warning("ai_service instance not found")
+    except Exception as e:
+        logger.warning(f"Could not initialize Qdrant integration: {e}")
+
+
+# Integration will be initialized when needed
+# Call initialize_qdrant_integration() manually if required
