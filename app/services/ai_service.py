@@ -2,6 +2,7 @@ from typing import List, Optional, Dict, Any
 from app.core.config import settings, logger
 
 import time
+import asyncio
 
 # LangChain and LangGraph imports for chat generation
 try:
@@ -63,7 +64,7 @@ class AIService:
                     self.chat_client = ChatGoogleGenerativeAI(
                         model="gemini-2.5-flash",  # Latest Gemini model
                         api_key=settings.GOOGLE_API_KEY,
-                        temperature=0.3,  # Lower temperature for consistent responses
+                        temperature=0.8,  # Higher temperature for more creative responses
                         max_tokens=2048,
                     )
                     logger.info(
@@ -168,13 +169,65 @@ class AIService:
         # Create the workflow
         self.workflow = StateGraph(RAGState)
 
-        # Add nodes
-        self.workflow.add_node("retrieve_documents", self._retrieve_documents_node)
+        # Helper: wrap node functions to add entry/exit/duration logging
+        def _wrap_node(fn, name: str):
+            if asyncio.iscoroutinefunction(fn):
+
+                async def _wrapped(state):
+                    logger.info(f"[workflow] Starting node '{name}'")
+                    start = time.time()
+                    try:
+                        res = await fn(state)
+                        duration = time.time() - start
+                        logger.info(
+                            f"[workflow] Finished node '{name}' in {duration:.3f}s"
+                        )
+                        return res
+                    except Exception as e:
+                        duration = time.time() - start
+                        logger.error(
+                            f"[workflow] Node '{name}' failed after {duration:.3f}s: {e}"
+                        )
+                        raise
+
+                return _wrapped
+            else:
+
+                def _wrapped(state):
+                    logger.info(f"[workflow] Starting node '{name}'")
+                    start = time.time()
+                    try:
+                        res = fn(state)
+                        duration = time.time() - start
+                        logger.info(
+                            f"[workflow] Finished node '{name}' in {duration:.3f}s"
+                        )
+                        return res
+                    except Exception as e:
+                        duration = time.time() - start
+                        logger.error(
+                            f"[workflow] Node '{name}' failed after {duration:.3f}s: {e}"
+                        )
+                        raise
+
+                return _wrapped
+
+        # Add nodes (wrapped to log execution)
         self.workflow.add_node(
-            "get_conversation_context", self._get_conversation_context_node
+            "retrieve_documents",
+            _wrap_node(self._retrieve_documents_node, "retrieve_documents"),
         )
-        self.workflow.add_node("generate_response", self._generate_response_node)
-        self.workflow.add_node("format_output", self._format_output_node)
+        self.workflow.add_node(
+            "get_conversation_context",
+            _wrap_node(self._get_conversation_context_node, "get_conversation_context"),
+        )
+        self.workflow.add_node(
+            "generate_response",
+            _wrap_node(self._generate_response_node, "generate_response"),
+        )
+        self.workflow.add_node(
+            "format_output", _wrap_node(self._format_output_node, "format_output")
+        )
 
         # Define the flow
         self.workflow.set_entry_point("retrieve_documents")
@@ -197,7 +250,7 @@ class AIService:
 
             # Search for relevant documents
             hits = await qdrant_service.search_vectors(
-                collection="default", query_vector=query_vector, top_k=5
+                collection="documents", query_vector=query_vector, top_k=5
             )
 
             # Extract document texts
@@ -407,8 +460,13 @@ Guidelines:
                 # Run the workflow
                 logger.info("⚡ Executing LangGraph workflow...")
                 workflow_start = time.time()
+                logger.info(
+                    f"[workflow] Initial state: { {k: type(v).__name__ for k,v in initial_state.items()} }"
+                )
                 result = await self.rag_app.ainvoke(initial_state)
                 workflow_time = time.time() - workflow_start
+
+                logger.info(f"[workflow] Raw result keys: {list(result.keys())}")
 
                 logger.info("✅ LangGraph workflow completed")
                 logger.info(f"⚡ Workflow execution time: {workflow_time:.2f}s")
@@ -459,7 +517,7 @@ Guidelines:
             from app.services.qdrant_service import qdrant_service
 
             hits = await qdrant_service.search_vectors(
-                collection="default", query_vector=qvec, top_k=top_k
+                collection="documents", query_vector=qvec, top_k=top_k
             )
         except Exception:
             hits = []
