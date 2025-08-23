@@ -1,0 +1,44 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '11112:8000'
+    environment:
+      QDRANT_API_KEY: ${QDRANT_API_KEY}
+      QDRANT_COLLECTION: ${QDRANT_COLLECTION}
+      QDRANT_DISTANCE: ${QDRANT_DISTANCE}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+      DEV_DISABLE_SSL_VERIFY: ${DEV_DISABLE_SSL_VERIFY}
+    env_file:
+      - .env
+    restart: unless-stopped
+    labels:
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-web.rule=Host(`fptanlnm-hcm-vr62td-cb4e80-160-191-88-194.traefik.me`)
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-web.entrypoints=web
+      - traefik.http.services.fptanlnm-hcm-vr62td-49-web.loadbalancer.server.port=11112
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-web.service=fptanlnm-hcm-vr62td-49-web
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-web.middlewares=redirect-to-https@file
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-websecure.rule=Host(`fptanlnm-hcm-vr62td-cb4e80-160-191-88-194.traefik.me`)
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-websecure.entrypoints=websecure
+      - traefik.http.services.fptanlnm-hcm-vr62td-49-websecure.loadbalancer.server.port=11112
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-websecure.service=fptanlnm-hcm-vr62td-49-websecure
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-websecure.tls.certresolver=letsencrypt
+      - traefik.docker.network=dokploy-network
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-web.rule=Host(`fptanlnm-hcm-vr62td-cb4e80-160-191-88-194.traefik.me`)
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-web.entrypoints=web
+      - traefik.http.services.fptanlnm-hcm-vr62td-49-web.loadbalancer.server.port=11112
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-web.service=fptanlnm-hcm-vr62td-49-web
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-web.middlewares=redirect-to-https@file
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-websecure.rule=Host(`fptanlnm-hcm-vr62td-cb4e80-160-191-88-194.traefik.me`)
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-websecure.entrypoints=websecure
+      - traefik.http.services.fptanlnm-hcm-vr62td-49-websecure.loadbalancer.server.port=11112
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-websecure.service=fptanlnm-hcm-vr62td-49-websecure
+      - traefik.http.routers.fptanlnm-hcm-vr62td-49-websecure.tls.certresolver=letsencrypt
+      - traefik.enable=true
+    networks:
+      - dokploy-network
+networks:
+  dokploy-network:
+    external: true
