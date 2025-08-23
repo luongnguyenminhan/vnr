@@ -388,11 +388,18 @@ Guidelines:
         session_id: Optional[str] = None,
     ) -> str:
         """Run RAG chat using LangGraph workflow or fallback to direct LangChain"""
+        start_time = time.time()
+        logger.info("🚀 STARTING RAG CHAT REQUEST")
+        logger.info(f"📝 Query: {query}")
+        logger.info(f"🔑 Session ID: {session_id}")
+        logger.info(f"📊 Top K: {top_k}")
+        logger.info(f"🤖 LangGraph Available: {LANGGRAPH_AVAILABLE}")
+        logger.info(f"⚙️ Workflow Compiled: {self.rag_app is not None}")
 
         # Use LangGraph workflow if available
         if self.rag_app and LANGGRAPH_AVAILABLE:
             try:
-                logger.info("Running RAG chat using LangGraph workflow")
+                logger.info("🔄 Running RAG chat using LangGraph workflow")
 
                 # Initialize state
                 initial_state: RAGState = {
@@ -404,24 +411,45 @@ Guidelines:
                     "metadata": {},
                 }
 
+                logger.info("📋 Initial state prepared")
+                logger.info(f"🔍 State keys: {list(initial_state.keys())}")
+
                 # Run the workflow
+                logger.info("⚡ Executing LangGraph workflow...")
+                workflow_start = time.time()
                 result = await self.rag_app.ainvoke(initial_state)
+                workflow_time = time.time() - workflow_start
+
+                logger.info("✅ LangGraph workflow completed")
+                logger.info(f"⚡ Workflow execution time: {workflow_time:.2f}s")
+                logger.info(f"📄 Result keys: {list(result.keys())}")
+                logger.info(f"💬 Response length: {len(result.get('response', ''))}")
+                logger.info(f"📚 Retrieved docs: {len(result.get('retrieved_documents', []))}")
 
                 # Update conversation history if session_id is provided
                 if session_id and result["response"]:
+                    logger.info("💾 Updating conversation history")
                     self.add_to_conversation_history(
                         session_id, query, result["response"]
                     )
+                    logger.info("✅ Conversation history updated")
 
-                logger.info("Successfully completed LangGraph RAG workflow")
+                total_time = time.time() - start_time
+                logger.info(f"⏱️ Total processing time: {total_time:.2f}s")
+                logger.info("🎉 RAG CHAT REQUEST COMPLETED SUCCESSFULLY")
+
                 return result["response"]
 
             except Exception as e:
-                logger.error(f"LangGraph workflow failed: {e}")
+                logger.error(f"❌ LangGraph workflow failed: {e}")
+                logger.error(f"🔍 Exception type: {type(e).__name__}")
+                logger.error(f"📍 Exception args: {e.args}")
+                logger.exception("Full traceback:")
                 # Fall back to direct LangChain approach
                 return await self._fallback_rag_chat(query, top_k, session_id)
 
         else:
+            logger.info("🔄 Using direct LangChain approach (LangGraph not available)")
             # Use direct LangChain approach
             return await self._fallback_rag_chat(query, top_k, session_id)
 

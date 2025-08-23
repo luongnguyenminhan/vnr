@@ -357,325 +357,413 @@ CHAT_BUBBLE_HTML = """
 
 <script>
 (function() {
-    const btn = document.getElementById('rag-btn');
-    const panel = document.getElementById('rag-panel');
-    const closeBtn = document.getElementById('rag-close');
-    const menuBtn = document.getElementById('rag-menu-btn');
-    const menu = document.getElementById('rag-menu');
-    const clearHistoryBtn = document.getElementById('clear-history-btn');
-    const showHistoryBtn = document.getElementById('show-history-btn');
-    const newSessionBtn = document.getElementById('new-session-btn');
-    const sessionInfo = document.getElementById('session-info');
-    const form = document.getElementById('rag-form');
-    const input = document.getElementById('rag-input');
-    const sendBtn = document.getElementById('rag-send');
-    const msgs = document.getElementById('rag-messages');
+    console.log('🔄 Initializing RAG Chat Bubble...');
 
-    let sessionId = localStorage.getItem('rag_session_id') || null;
-    let isOpen = false;
-    let conversationTurns = 0;
-
-    // Safe JSON parser: falls back to raw text when JSON parsing fails
-    async function safeParseJSON(response) {
-        try {
-            return await response.json();
-        } catch (err) {
-            try {
-                const text = await response.text();
-                return { __raw_text: text };
-            } catch (e) {
-                return { __raw_text: '' };
-            }
-        }
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeChat);
+    } else {
+        initializeChat();
     }
 
-    // Auto-resize textarea
-    input.addEventListener('input', function() {
-        this.style.height = 'auto';
-        this.style.height = Math.min(this.scrollHeight, 100) + 'px';
-    });
+    function initializeChat() {
+        console.log('📝 DOM ready, initializing chat elements...');
 
-    // Update session info display
-    function updateSessionInfo() {
-        if (sessionId) {
-            const shortId = sessionId.substring(0, 8);
-            sessionInfo.textContent = `Session: ${shortId} (${conversationTurns} turns)`;
-        } else {
-            sessionInfo.textContent = 'Session: New';
+        const btn = document.getElementById('rag-btn');
+        const panel = document.getElementById('rag-panel');
+        const closeBtn = document.getElementById('rag-close');
+        const menuBtn = document.getElementById('rag-menu-btn');
+        const menu = document.getElementById('rag-menu');
+        const clearHistoryBtn = document.getElementById('clear-history-btn');
+        const showHistoryBtn = document.getElementById('show-history-btn');
+        const newSessionBtn = document.getElementById('new-session-btn');
+        const sessionInfo = document.getElementById('session-info');
+        const form = document.getElementById('rag-form');
+        const input = document.getElementById('rag-input');
+        const sendBtn = document.getElementById('rag-send');
+        const msgs = document.getElementById('rag-messages');
+
+        console.log('🔍 Elements found:', {
+            btn: !!btn,
+            panel: !!panel,
+            closeBtn: !!closeBtn,
+            form: !!form,
+            input: !!input,
+            msgs: !!msgs
+        });
+
+        if (!btn || !panel || !form || !input || !msgs) {
+            console.error('❌ Critical chat elements not found!');
+            return;
         }
-    }
 
-    // Menu toggle
-    menuBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    });
+        let sessionId = localStorage.getItem('rag_session_id') || null;
+        let isOpen = false;
+        let conversationTurns = 0;
 
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!menu.contains(e.target) && e.target !== menuBtn) {
-            menu.style.display = 'none';
-        }
-    });
-
-    // Clear conversation history
-    clearHistoryBtn.addEventListener('click', async function() {
-        if (sessionId && confirm('Clear conversation history? This cannot be undone.')) {
+        // Safe JSON parser: falls back to raw text when JSON parsing fails
+        async function safeParseJSON(response) {
             try {
-                const response = await fetch(`/chat/conversation/${sessionId}`, {
-                    method: 'DELETE'
-                });
-                const result = await safeParseJSON(response);
-
-                if (response.ok) {
-                    // Clear local messages (keep welcome message)
-                    const welcomeMessage = msgs.querySelector('.welcome-message');
-                    msgs.innerHTML = '';
-                    if (welcomeMessage) {
-                        msgs.appendChild(welcomeMessage);
-                    }
-
-                    conversationTurns = 0;
-                    updateSessionInfo();
-                    addMessage('Conversation history cleared successfully!', 'bot');
-                } else {
-                    const detail = result.detail || result.__raw_text || 'Unknown error';
-                    addMessage('Failed to clear history: ' + detail, 'error');
+                return await response.json();
+            } catch (err) {
+                try {
+                    const text = await response.text();
+                    return { __raw_text: text };
+                } catch (e) {
+                    return { __raw_text: '' };
                 }
-            } catch (error) {
-                addMessage('Error clearing history: ' + error.message, 'error');
             }
         }
-        menu.style.display = 'none';
-    });
 
-    // Show conversation history
-    showHistoryBtn.addEventListener('click', async function() {
-        if (sessionId) {
-            try {
-                const response = await fetch(`/chat/conversation/${sessionId}`);
-                const result = await response.json();
+        // Auto-resize textarea
+        input.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+        });
 
-                if (response.ok) {
-                    let historyText = '📝 Conversation History:\\n\\n';
-                    result.history.forEach((turn, index) => {
-                        const date = new Date(turn.timestamp * 1000).toLocaleString();
-                        historyText += `Turn ${index + 1} (${date}):\\n`;
-                        historyText += `User: ${turn.user}\\n`;
-                        historyText += `AI: ${turn.ai}\\n\\n`;
+        // Update session info display
+        function updateSessionInfo() {
+            if (sessionId) {
+                const shortId = sessionId.substring(0, 8);
+                sessionInfo.textContent = `Session: ${shortId} (${conversationTurns} turns)`;
+            } else {
+                sessionInfo.textContent = 'Session: New';
+            }
+        }
+
+        // Menu toggle
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!menu.contains(e.target) && e.target !== menuBtn) {
+                menu.style.display = 'none';
+            }
+        });
+
+        // Clear conversation history
+        clearHistoryBtn.addEventListener('click', async function() {
+            if (sessionId && confirm('Clear conversation history? This cannot be undone.')) {
+                try {
+                    console.log('🗑️ Clearing conversation history for session:', sessionId);
+                    const response = await fetch(`/chat/conversation/${sessionId}`, {
+                        method: 'DELETE'
                     });
+                    const result = await safeParseJSON(response);
+                    console.log('🗑️ Clear history response:', response.status, result);
 
-                    addMessage(historyText, 'bot');
-                } else {
-                    addMessage('Failed to retrieve history: ' + result.detail, 'error');
+                    if (response.ok) {
+                        // Clear local messages (keep welcome message)
+                        const welcomeMessage = msgs.querySelector('.welcome-message');
+                        msgs.innerHTML = '';
+                        if (welcomeMessage) {
+                            msgs.appendChild(welcomeMessage);
+                        }
+
+                        conversationTurns = 0;
+                        updateSessionInfo();
+                        addMessage('Conversation history cleared successfully!', 'bot');
+                        console.log('✅ Conversation history cleared successfully');
+                    } else {
+                        const detail = result.detail || result.__raw_text || 'Unknown error';
+                        addMessage('Failed to clear history: ' + detail, 'error');
+                        console.error('❌ Failed to clear history:', detail);
+                    }
+                } catch (error) {
+                    addMessage('Error clearing history: ' + error.message, 'error');
+                    console.error('❌ Error clearing history:', error);
                 }
-            } catch (error) {
-                addMessage('Error retrieving history: ' + error.message, 'error');
             }
-        } else {
-            addMessage('No active conversation session.', 'bot');
-        }
-        menu.style.display = 'none';
-    });
+            menu.style.display = 'none';
+        });
 
-    // Start new session
-    newSessionBtn.addEventListener('click', function() {
-        if (confirm('Start a new conversation? Current history will be preserved.')) {
-            sessionId = null;
-            localStorage.removeItem('rag_session_id');
-            conversationTurns = 0;
-            updateSessionInfo();
-
-            // Clear messages but keep welcome
-            const welcomeMessage = msgs.querySelector('.welcome-message');
-            msgs.innerHTML = '';
-            if (welcomeMessage) {
-                msgs.appendChild(welcomeMessage);
-            }
-
-            addMessage('Started new conversation session!', 'bot');
-        }
-        menu.style.display = 'none';
-    });
-
-    // Toggle panel
-    function togglePanel() {
-        isOpen = !isOpen;
-        panel.style.display = isOpen ? 'flex' : 'none';
-        if (isOpen) {
-            input.focus();
+        // Show conversation history
+        showHistoryBtn.addEventListener('click', async function() {
+            console.log('📝 Showing conversation history for session:', sessionId);
+            if (sessionId) {
+                try {
                     const response = await fetch(`/chat/conversation/${sessionId}`);
                     const result = await safeParseJSON(response);
-        }
-    }
+                    console.log('📝 History response:', response.status, result);
+
+                    if (response.ok) {
                         const history = result.history || [];
                         if (!history.length) {
                             const raw = result.__raw_text;
                             addMessage(raw ? `History: ${raw}` : 'No conversation history found.', 'bot');
                         } else {
-                            let historyText = '📝 Conversation History:\n\n';
+                            let historyText = '📝 Conversation History:\\n\\n';
                             history.forEach((turn, index) => {
                                 const date = new Date(turn.timestamp * 1000).toLocaleString();
-                                historyText += `Turn ${index + 1} (${date}):\n`;
-                                historyText += `User: ${turn.user}\n`;
-                                historyText += `AI: ${turn.ai}\n\n`;
+                                historyText += `Turn ${index + 1} (${date}):\\n`;
+                                historyText += `User: ${turn.user}\\n`;
+                                historyText += `AI: ${turn.ai}\\n\\n`;
                             });
                             addMessage(historyText, 'bot');
                         }
-    // Close panel when clicking outside
+                        console.log('✅ Conversation history displayed successfully');
+                    } else {
                         const detail = result.detail || result.__raw_text || 'Unknown error';
                         addMessage('Failed to retrieve history: ' + detail, 'error');
-        if (isOpen && !panel.contains(e.target) && e.target !== btn) {
-            togglePanel();
-        }
-    });
-
-    // Add message to chat
-    function addMessage(content, type = 'bot', timestamp = null) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${type}`;
-
-        const timeStr = timestamp ? new Date(timestamp * 1000).toLocaleTimeString() : new Date().toLocaleTimeString();
-
-        if (type === 'typing') {
-            messageDiv.innerHTML = `
-                <div class="typing-dots">
-                    <span></span><span></span><span></span>
-                </div>
-                <span>AI is typing...</span>
-            `;
-        } else {
-            messageDiv.innerHTML = `
-                ${content}
-                <span class="timestamp">${timeStr}</span>
-            `;
-        }
-
-        msgs.appendChild(messageDiv);
-        msgs.scrollTop = msgs.scrollHeight;
-        return messageDiv;
-    }
-
-    // Remove typing indicator
-    function removeTyping() {
-        const typingMsg = msgs.querySelector('.message.typing');
-        if (typingMsg) {
-            typingMsg.remove();
-        }
-    }
-
-    // Handle form submission
-    async function sendMessage() {
-        const message = input.value.trim();
-        if (!message) return;
-
-        // Add user message
-        addMessage(message, 'user');
-        input.value = '';
-        input.style.height = 'auto';
-
-        // Disable input while processing
-        input.disabled = true;
-        sendBtn.disabled = true;
-
-        // Show typing indicator
-        const typingIndicator = addMessage('', 'typing');
-
-        try {
-            const response = await fetch('/chat/send', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    query: message,
-                    session_id: sessionId
-                })
-            });
-
-            const data = await safeParseJSON(response);
-
-            if (response.ok) {
-                // Update session ID
-                if (data.session_id) {
-                    sessionId = data.session_id;
-                    localStorage.setItem('rag_session_id', sessionId);
-                }
-
-                // Increment conversation turns
-                conversationTurns++;
-                updateSessionInfo();
-
-                // Remove typing indicator and add bot response
-                removeTyping();
-                if (data && (data.message || data.__raw_text)) {
-                    const msg = data.message || data.__raw_text || 'No response';
-                    addMessage(msg, 'bot', data.timestamp);
-                } else {
-                    addMessage('No response from server.', 'bot', data.timestamp);
-                }
-
-                // Show notification if chat is closed
-                if (!isOpen) {
-                    btn.classList.add('notification');
+                        console.error('❌ Failed to retrieve history:', detail);
+                    }
+                } catch (error) {
+                    addMessage('Error retrieving history: ' + error.message, 'error');
+                    console.error('❌ Error retrieving history:', error);
                 }
             } else {
-                const detail = data.detail || data.__raw_text || 'Request failed';
-                throw new Error(detail);
+                addMessage('No active conversation session.', 'bot');
             }
+            menu.style.display = 'none';
+        });
 
-        } catch (error) {
-            removeTyping();
-            addMessage(`Sorry, I encountered an error: ${error.message}. Please try again.`, 'error');
+        // Start new session
+        newSessionBtn.addEventListener('click', function() {
+            console.log('🔄 Starting new session');
+            if (confirm('Start a new conversation? Current history will be preserved.')) {
+                sessionId = null;
+                localStorage.removeItem('rag_session_id');
+                conversationTurns = 0;
+                updateSessionInfo();
 
-            // Show notification for errors
-            if (!isOpen) {
-                btn.classList.add('notification');
+                // Clear messages but keep welcome
+                const welcomeMessage = msgs.querySelector('.welcome-message');
+                msgs.innerHTML = '';
+                if (welcomeMessage) {
+                    msgs.appendChild(welcomeMessage);
+                }
+
+                addMessage('Started new conversation session!', 'bot');
+                console.log('✅ New session started');
             }
-        } finally {
-            input.disabled = false;
-            sendBtn.disabled = false;
-            input.focus();
+            menu.style.display = 'none';
+        });
+
+        // Toggle panel
+        function togglePanel() {
+            console.log('🔄 Toggling panel, current state:', isOpen);
+            isOpen = !isOpen;
+            panel.style.display = isOpen ? 'flex' : 'none';
+
+            if (isOpen) {
+                console.log('📂 Panel opened, focusing input');
+                input.focus();
+            } else {
+                console.log('📁 Panel closed');
+            }
         }
-    }
 
-    form.onsubmit = function(e) {
-        e.preventDefault();
-        sendMessage();
-    };
+        // Close panel when clicking outside
+        document.addEventListener('click', function(e) {
+            if (isOpen && !panel.contains(e.target) && e.target !== btn) {
+                console.log('👆 Clicking outside panel, closing it');
+                togglePanel();
+            }
+        });
 
-    // Handle Enter key (send on Enter, new line on Shift+Enter)
-    input.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
+        // Add message to chat
+        function addMessage(content, type = 'bot', timestamp = null) {
+            console.log('💬 Adding message:', type, content.substring(0, 50) + '...');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+
+            const timeStr = timestamp ? new Date(timestamp * 1000).toLocaleTimeString() : new Date().toLocaleTimeString();
+
+            if (type === 'typing') {
+                messageDiv.innerHTML = `
+                    <div class="typing-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <span>AI is typing...</span>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    ${content}
+                    <span class="timestamp">${timeStr}</span>
+                `;
+            }
+
+            msgs.appendChild(messageDiv);
+            msgs.scrollTop = msgs.scrollHeight;
+            return messageDiv;
+        }
+
+        // Remove typing indicator
+        function removeTyping() {
+            console.log('🔄 Removing typing indicator');
+            const typingMsg = msgs.querySelector('.message.typing');
+            if (typingMsg) {
+                typingMsg.remove();
+                console.log('✅ Typing indicator removed');
+            }
+        }
+
+        // Handle form submission
+        async function sendMessage() {
+            const message = input.value.trim();
+            if (!message) {
+                console.log('⚠️ Empty message, not sending');
+                return;
+            }
+
+            console.log('📤 Sending message:', message.substring(0, 50) + '...');
+            console.log('🔑 Session ID:', sessionId);
+
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+            input.style.height = 'auto';
+
+            // Disable input while processing
+            input.disabled = true;
+            sendBtn.disabled = true;
+            console.log('🔒 Input disabled, processing message');
+
+            // Show typing indicator
+            const typingIndicator = addMessage('', 'typing');
+            console.log('💭 Typing indicator shown');
+
+            try {
+                console.log('🌐 Making API request to /chat/send');
+                const startTime = Date.now();
+
+                const response = await fetch('/chat/send', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        query: message,
+                        session_id: sessionId
+                    })
+                });
+
+                const responseTime = Date.now() - startTime;
+                console.log('📡 API response received:', response.status, response.statusText, `(${responseTime}ms)`);
+
+                const data = await safeParseJSON(response);
+                console.log('📄 Response data:', data ? 'Data received' : 'No data');
+
+                if (response.ok) {
+                    console.log('✅ API request successful');
+
+                    // Update session ID
+                    if (data.session_id) {
+                        const oldSessionId = sessionId;
+                        sessionId = data.session_id;
+                        localStorage.setItem('rag_session_id', sessionId);
+                        if (oldSessionId !== sessionId) {
+                            console.log('🔄 Session ID updated:', oldSessionId, '->', sessionId);
+                        }
+                    }
+
+                    // Increment conversation turns
+                    conversationTurns++;
+                    updateSessionInfo();
+                    console.log('📊 Conversation turns:', conversationTurns);
+
+                    // Remove typing indicator and add bot response
+                    removeTyping();
+                    if (data && (data.message || data.__raw_text)) {
+                        const msg = data.message || data.__raw_text || 'No response';
+                        console.log('🤖 Adding bot response:', msg.substring(0, 50) + '...');
+                        addMessage(msg, 'bot', data.timestamp);
+                    } else {
+                        console.log('⚠️ No response content from server');
+                        addMessage('No response from server.', 'bot', data.timestamp);
+                    }
+
+                    // Show notification if chat is closed
+                    if (!isOpen) {
+                        console.log('🔔 Adding notification to button');
+                        btn.classList.add('notification');
+                    }
+
+                    console.log('✅ Message processing completed successfully');
+                } else {
+                    const detail = data.detail || data.__raw_text || 'Request failed';
+                    console.error('❌ API request failed:', detail);
+                    throw new Error(detail);
+                }
+
+            } catch (error) {
+                console.error('❌ Error in sendMessage:', error);
+                removeTyping();
+                addMessage(`Sorry, I encountered an error: ${error.message}. Please try again.`, 'error');
+
+                // Show notification for errors
+                if (!isOpen) {
+                    console.log('🔔 Adding error notification to button');
+                    btn.classList.add('notification');
+                }
+            } finally {
+                console.log('🔓 Re-enabling input');
+                input.disabled = false;
+                sendBtn.disabled = false;
+                input.focus();
+            }
+        }
+
+        form.onsubmit = function(e) {
+            console.log('📝 Form submitted');
             e.preventDefault();
             sendMessage();
-        }
-    });
+        };
 
-    // Save chat state
-    window.addEventListener('beforeunload', function() {
-        if (msgs.children.length > 1) { // More than welcome message
-            localStorage.setItem('rag_chat_open', isOpen.toString());
-        }
-    });
+        // Handle Enter key (send on Enter, new line on Shift+Enter)
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                console.log('⌨️ Enter key pressed, sending message');
+                e.preventDefault();
+                sendMessage();
+            }
+        });
 
-    // Restore chat state
-    const wasOpen = localStorage.getItem('rag_chat_open') === 'true';
-    if (wasOpen) {
-        setTimeout(() => togglePanel(), 1000); // Delay to ensure page is loaded
+        // Save chat state
+        window.addEventListener('beforeunload', function() {
+            console.log('💾 Saving chat state');
+            if (msgs.children.length > 1) { // More than welcome message
+                localStorage.setItem('rag_chat_open', isOpen.toString());
+            }
+        });
+
+        // Restore chat state
+        const wasOpen = localStorage.getItem('rag_chat_open') === 'true';
+        console.log('🔄 Restoring chat state, wasOpen:', wasOpen);
+        if (wasOpen) {
+            setTimeout(() => {
+                console.log('🔄 Auto-opening chat panel');
+                togglePanel();
+            }, 1000); // Delay to ensure page is loaded
+        }
+
+        // Initialize session info and load conversation count
+        updateSessionInfo();
+        conversationTurns = parseInt(localStorage.getItem('rag_conversation_turns') || '0');
+        console.log('📊 Initialized with', conversationTurns, 'conversation turns');
+
+        // Add some initial animation
+        setTimeout(() => {
+            console.log('🎨 Adding initial button animation');
+            btn.style.animation = 'pulse 2s infinite';
+        }, 3000);
+
+        // Save conversation state
+        window.addEventListener('beforeunload', function() {
+            localStorage.setItem('rag_conversation_turns', conversationTurns.toString());
+        });
+
+        // Button click handler
+        btn.addEventListener('click', function() {
+            console.log('🔘 Chat button clicked');
+            togglePanel();
+        });
+
+        console.log('✅ Chat bubble initialization completed');
     }
 
-    // Initialize session info and load conversation count
-    updateSessionInfo();
-    conversationTurns = parseInt(localStorage.getItem('rag_conversation_turns') || '0');
-
-    // Add some initial animation
-    setTimeout(() => {
-        btn.style.animation = 'pulse 2s infinite';
-    }, 3000);
-
-    // Save conversation state
-    window.addEventListener('beforeunload', function() {
-        localStorage.setItem('rag_conversation_turns', conversationTurns.toString());
-    });
+    console.log('🚀 Chat bubble script loaded');
 })();
 </script>
 """

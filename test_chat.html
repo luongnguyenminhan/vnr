@@ -184,12 +184,19 @@
         // Load chat bubble
         async function loadChatBubble() {
             try {
+                console.log('🔄 Starting to load chat bubble...');
                 const response = await fetch('http://127.0.0.1:8000/chat/bubble');
+                console.log('📡 Chat bubble API response:', response.status, response.statusText);
+
                 const data = await response.json();
+                console.log('📄 Chat bubble data received:', data ? 'Data exists' : 'No data');
 
                 if (response.ok) {
+                    console.log('✅ Chat bubble API call successful, inserting HTML...');
+
                     // Insert the chat bubble HTML into the page and execute its scripts
                     (function insertAndRun(html) {
+                        console.log('🔧 Inserting chat bubble HTML into page...');
                         const temp = document.createElement('div');
                         temp.innerHTML = html;
 
@@ -201,32 +208,46 @@
 
                         // Find and execute scripts (preserve src and inline)
                         const scripts = temp.querySelectorAll('script');
-                        scripts.forEach((s) => {
+                        console.log(`📝 Found ${scripts.length} scripts to execute`);
+
+                        scripts.forEach((s, index) => {
                             const newScript = document.createElement('script');
                             if (s.src) {
                                 newScript.src = s.src;
                                 newScript.async = false; // preserve execution order
+                                console.log(`🔗 Loading external script: ${s.src}`);
                             } else {
                                 newScript.textContent = s.textContent || s.innerText || '';
+                                console.log(`📄 Executing inline script ${index + 1}`);
                             }
                             document.body.appendChild(newScript);
                         });
+
+                        console.log('✅ Chat bubble HTML and scripts inserted successfully');
                     })(data.html);
 
                     const placeholder = document.getElementById('chat-placeholder');
-                    placeholder.innerHTML = '<div class="status connected">✅ Chat bubble loaded successfully!</div>';
+                    if (placeholder) {
+                        placeholder.innerHTML = '<div class="status connected">✅ Chat bubble loaded successfully!</div>';
+                    } else {
+                        console.warn('⚠️ Chat placeholder element not found');
+                    }
                 } else {
                     throw new Error(`HTTP ${response.status}: ${data.detail || 'Unknown error'}`);
                 }
             } catch (error) {
+                console.error('❌ Error loading chat bubble:', error);
                 const placeholder = document.getElementById('chat-placeholder');
-                placeholder.innerHTML = `
-                    <div class="error">
-                        <strong>Failed to load chat bubble:</strong><br>
-                        ${error.message}<br><br>
-                        Make sure your FastAPI server is running and accessible at localhost:8000
-                    </div>
-                `;
+                if (placeholder) {
+                    placeholder.innerHTML = `
+                        <div class="error">
+                            <strong>Failed to load chat bubble:</strong><br>
+                            ${error.message}<br><br>
+                            Check browser console for detailed error logs.<br>
+                            Make sure your FastAPI server is running on localhost:8000
+                        </div>
+                    `;
+                }
             }
         }
 
