@@ -65,9 +65,9 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 ### 5. Access the Application
 
-- **API Documentation**: http://localhost:8000/docs
-- **Admin Interface**: http://localhost:8000/admin/ui
-- **Health Check**: http://localhost:8000/health
+- **API Documentation**: http://127.0.0.1:8000/docs
+- **Admin Interface**: http://127.0.0.1:8000/admin/ui
+- **Health Check**: http://127.0.0.1:8000/chat/health
 
 ## 📡 API Endpoints
 
@@ -111,7 +111,7 @@ DEFAULT_ADMIN_PASSWORD = "ChangeMeHardCoded123!"  # INSECURE BY DESIGN
 
 1. Get the chat bubble HTML:
 ```bash
-curl http://localhost:8000/chat/bubble
+curl http://127.0.0.1:8000/chat/bubble
 ```
 
 2. Copy the returned HTML and paste it into your website's `<body>` tag

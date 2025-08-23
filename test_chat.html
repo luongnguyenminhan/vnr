@@ -130,7 +130,7 @@
             <div class="section">
                 <h2>📝 Test Instructions</h2>
                 <ol style="color: rgba(255, 255, 255, 0.9);">
-                    <li>Make sure your FastAPI server is running on <code>localhost:8000</code></li>
+                    <li>Make sure your FastAPI server is running on <code>127.0.0.1:8000</code></li>
                     <li>Click the chat button in the bottom-right corner</li>
                     <li>Try asking questions to test the conversation memory</li>
                     <li>Use the menu (⋮) to manage your conversation</li>
@@ -140,9 +140,9 @@
 
             <div class="section">
                 <h2>🔧 Quick Actions</h2>
-                <a href="http://localhost:8000/admin/ui" class="btn" target="_blank">🛠️ Admin Panel</a>
-                <a href="http://localhost:8000/docs" class="btn" target="_blank">📚 API Docs</a>
-                <a href="http://localhost:8000/health" class="btn" target="_blank">❤️ Health Check</a>
+                <a href="http://127.0.0.1:8000/admin/ui" class="btn" target="_blank">🛠️ Admin Panel</a>
+                <a href="http://127.0.0.1:8000/docs" class="btn" target="_blank">📚 API Docs</a>
+                <a href="http://127.0.0.1:8000/chat/health" class="btn" target="_blank">❤️ Health Check</a>
             </div>
         </div>
     </div>
@@ -152,7 +152,7 @@
         // Check server status
         async function checkServerStatus() {
             try {
-                const response = await fetch('http://localhost:8000/health');
+                const response = await fetch('http://127.0.0.1:8000/chat/health');
                 const data = await response.json();
 
                 const statusDiv = document.getElementById('status');
@@ -184,7 +184,7 @@
         // Load chat bubble
         async function loadChatBubble() {
             try {
-                const response = await fetch('http://localhost:8000/chat/bubble');
+                const response = await fetch('http://127.0.0.1:8000/chat/bubble');
                 const data = await response.json();
 
                 if (response.ok) {

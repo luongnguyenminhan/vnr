@@ -1,14 +1,18 @@
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings
 import logging
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Settings(BaseSettings):
-    GOOGLE_API_KEY: str | None = None
-    QDRANT_URL: str = "http://localhost:6333"
-    QDRANT_API_KEY: str | None = None
+    GOOGLE_API_KEY: str | None = os.getenv("GOOGLE_API_KEY")
+    QDRANT_URL: str = os.getenv("QDRANT_URL", "http://localhost:6333")
+    QDRANT_API_KEY: str | None = os.getenv("QDRANT_API_KEY")
     DEFAULT_ADMIN_PASSWORD: str = (
-        "ChangeMeHardCoded123!"  # REQUIRED by spec: hard-coded
+        "11minhan"  # REQUIRED by spec: hard-coded
     )
     # Other settings
     RAG_TOP_K: int = 5

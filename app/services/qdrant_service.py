@@ -4,6 +4,7 @@ from qdrant_client.http import models as qmodels
 from qdrant_client.http.exceptions import UnexpectedResponse
 from app.core.config import settings, logger
 import asyncio
+import uuid
 
 
 class QdrantService:
@@ -120,7 +121,9 @@ class QdrantService:
             # Create points for upsert
             points = []
             for idx, vec in enumerate(vectors):
-                point_id = f"{collection}_{idx}_{hash(str(vec))}"  # Generate unique ID
+                # Qdrant requires point IDs to be either an unsigned integer or a UUID string.
+                # Previous implementation used a custom string with hashes which produced invalid IDs.
+                point_id = str(uuid.uuid4())
                 points.append(
                     qmodels.PointStruct(id=point_id, vector=vec, payload=payloads[idx])
                 )
