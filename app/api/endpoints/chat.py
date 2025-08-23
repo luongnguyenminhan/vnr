@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
-from typing import Optional, List
+from typing import Optional
 import uuid
 import time
 
@@ -51,8 +51,12 @@ async def send_chat(payload: ChatRequest):
         print(f"\n🚀 CHAT REQUEST STARTED - ID: {request_id}")
         print(f"📝 Query: {payload.query}")
         print(f"🔑 Session ID: {payload.session_id}")
-        print(f"📊 Query length: {len(payload.query) if payload.query else 0} characters")
-        print(f"⏰ Request start time: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(request_start_time))}")
+        print(
+            f"📊 Query length: {len(payload.query) if payload.query else 0} characters"
+        )
+        print(
+            f"⏰ Request start time: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(request_start_time))}"
+        )
 
         # Validate query
         if not payload.query or not payload.query.strip():
@@ -83,7 +87,7 @@ async def send_chat(payload: ChatRequest):
         )
         rag_processing_time = time.time() - rag_start_time
 
-        print(".2f")
+        print(f"⏱️ RAG processing time: {rag_processing_time:.2f}s")
         print(f"💬 Answer length: {len(answer) if answer else 0} characters")
 
         if not answer:
@@ -104,6 +108,7 @@ async def send_chat(payload: ChatRequest):
 
         # Calculate total request time
         total_time = time.time() - request_start_time
+        print(f"⏱️ Total request time: {total_time:.2f}s")
 
         response_data = ChatResponse(
             message=answer,
@@ -113,7 +118,7 @@ async def send_chat(payload: ChatRequest):
             status="success",
         )
 
-        print(".2f")
+        print(f"⏱️ RAG processing time: {rag_processing_time:.2f}s")
         print(f"📊 Response data size: {len(str(response_data.dict()))} characters")
         print(f"🎉 CHAT REQUEST COMPLETED - ID: {request_id}")
         print("=" * 60)
@@ -128,6 +133,7 @@ async def send_chat(payload: ChatRequest):
         print(f"🔍 Exception type: {type(e).__name__}")
         print(f"📍 Exception args: {e.args}")
         import traceback
+
         print(f"📄 Traceback:\n{traceback.format_exc()}")
         raise HTTPException(status_code=500, detail=f"Chat processing failed: {str(e)}")
 
@@ -194,7 +200,9 @@ async def get_conversation_history(session_id: str):
     try:
         print(f"📝 Get conversation history endpoint called for session: {session_id}")
         history = ai_service.get_conversation_history(session_id)
-        print(f"📚 Retrieved {len(history)} conversation turns for session: {session_id}")
+        print(
+            f"📚 Retrieved {len(history)} conversation turns for session: {session_id}"
+        )
         return {
             "status": "success",
             "session_id": session_id,
@@ -202,7 +210,9 @@ async def get_conversation_history(session_id: str):
             "total_turns": len(history),
         }
     except Exception as e:
-        print(f"❌ Error retrieving conversation history for session {session_id}: {str(e)}")
+        print(
+            f"❌ Error retrieving conversation history for session {session_id}: {str(e)}"
+        )
         raise HTTPException(
             status_code=500, detail=f"Failed to retrieve conversation history: {str(e)}"
         )

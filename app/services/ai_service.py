@@ -1,8 +1,6 @@
 from typing import List, Optional, Dict, Any
 from app.core.config import settings, logger
-from app.services.qdrant_service import qdrant_service
 
-import asyncio
 import time
 
 # LangChain and LangGraph imports for chat generation
@@ -11,19 +9,11 @@ try:
     from langchain_core.messages import (
         HumanMessage,
         SystemMessage,
-        AIMessage,
-        BaseMessage,
     )
-    from langchain.memory import ConversationBufferWindowMemory
-    from langchain.chains import ConversationChain
 
     # LangGraph imports for workflow management
     from langgraph.graph import StateGraph, END
-    from langgraph.prebuilt import ToolNode
-    from langchain_core.tools import tool
-    from langchain_core.runnables import RunnableConfig
     from typing_extensions import TypedDict
-    from langchain_core.prompts import ChatPromptTemplate
 
     LANGCHAIN_AVAILABLE = True
     LANGGRAPH_AVAILABLE = True
@@ -424,7 +414,9 @@ Guidelines:
                 logger.info(f"⚡ Workflow execution time: {workflow_time:.2f}s")
                 logger.info(f"📄 Result keys: {list(result.keys())}")
                 logger.info(f"💬 Response length: {len(result.get('response', ''))}")
-                logger.info(f"📚 Retrieved docs: {len(result.get('retrieved_documents', []))}")
+                logger.info(
+                    f"📚 Retrieved docs: {len(result.get('retrieved_documents', []))}"
+                )
 
                 # Update conversation history if session_id is provided
                 if session_id and result["response"]:
