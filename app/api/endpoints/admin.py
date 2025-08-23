@@ -518,7 +518,7 @@ async def admin_ui(request: Request):
                         <label for="deleteCollection">Collection to Delete</label>
                         <select id="deleteCollection" required>
                             <option value="">Select a collection...</option>
-                            {"".join([f"<option value='{c.get("name")}'>{c.get("name")} ({c.get("vectors_count", 0)} vectors)</option>" for c in collections])}
+                            {"".join([f"<option value='{c.get('name')}'>{c.get('name')} ({c.get('vectors_count', 0)} vectors)</option>" for c in collections])}
                         </select>
                     </div>
 

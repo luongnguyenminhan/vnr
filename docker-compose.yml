@@ -11,6 +11,7 @@ services:
       QDRANT_DISTANCE: ${QDRANT_DISTANCE}
       GOOGLE_API_KEY: ${GOOGLE_API_KEY}
       DEV_DISABLE_SSL_VERIFY: ${DEV_DISABLE_SSL_VERIFY}
+      QDRANT_URL: ${QDRANT_URL}
     env_file:
       - .env
     restart: unless-stopped

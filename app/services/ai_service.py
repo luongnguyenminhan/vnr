@@ -360,7 +360,7 @@ class AIService:
             context_parts = []
             if state["retrieved_documents"]:
                 context_parts.append(
-                    f"Retrieved Document Context:\n{'\n\n'.join(state['retrieved_documents'])}"
+                    "Retrieved Document Context:\n\n" + "\n\n".join(state["retrieved_documents"])
                 )
             if state["conversation_context"]:
                 context_parts.append(

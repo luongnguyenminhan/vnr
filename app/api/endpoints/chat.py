@@ -4,7 +4,6 @@ from typing import Optional
 import uuid
 import time
 
-from app.utils.chat_bubble_template import CHAT_BUBBLE_HTML
 from app.services.ai_service import ai_service
 
 router = APIRouter()
@@ -20,24 +19,8 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     message: str
     session_id: str
-    bubble_html: Optional[str] = None
     timestamp: float
     status: str = "success"
-
-
-@router.get("/bubble")
-async def get_bubble():
-    """Returns the HTML snippet for the chat bubble widget."""
-    try:
-        print("🎈 Chat bubble endpoint called")
-        bubble_size = len(CHAT_BUBBLE_HTML)
-        print(f"📄 Chat bubble HTML size: {bubble_size} characters")
-        return {"html": CHAT_BUBBLE_HTML, "status": "success"}
-    except Exception as e:
-        print(f"❌ Error loading chat bubble: {str(e)}")
-        raise HTTPException(
-            status_code=500, detail=f"Failed to load chat bubble: {str(e)}"
-        )
 
 
 @router.post("/send", response_model=ChatResponse)
@@ -113,7 +96,6 @@ async def send_chat(payload: ChatRequest):
         response_data = ChatResponse(
             message=answer,
             session_id=session_id,
-            bubble_html=None,
             timestamp=time.time(),
             status="success",
         )

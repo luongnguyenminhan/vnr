@@ -28,11 +28,32 @@ A production-ready FastAPI service that provides conversational RAG (Retrieval-A
 git clone <repository-url>
 cd vnr
 
-# Install dependencies
+# Install Python dependencies
 pip install -r requirements.txt
 ```
 
-### 2. Configuration
+### 2. Build Frontend (Next.js)
+
+The project includes a Next.js frontend that needs to be built and served as static files:
+
+```bash
+# Option 1: Using Python script (cross-platform)
+python build_frontend.py
+
+# Option 2: Using PowerShell script (Windows)
+.\build_frontend.ps1
+
+# Option 3: Manual build process
+cd fe
+npm install
+npm run build
+cd ..
+# Copy fe/dist to app/static (this is done automatically by the build scripts)
+```
+
+**Note**: The frontend build process compiles the Next.js app and copies the static export to `app/static/` where FastAPI serves it.
+
+### 3. Configuration
 
 ```bash
 # Copy environment template
@@ -43,7 +64,7 @@ GOOGLE_API_KEY=your_google_api_key_here
 QDRANT_URL=http://localhost:6333  # Adjust if needed
 ```
 
-### 3. Start Qdrant (if running locally)
+### 4. Start Qdrant (if running locally)
 
 ```bash
 # Using Docker
@@ -53,7 +74,7 @@ docker run -d -p 6333:6333 qdrant/qdrant
 docker-compose up qdrant
 ```
 
-### 4. Run the Application
+### 5. Run the Application
 
 ```bash
 # Development server
@@ -61,9 +82,15 @@ uvicorn app.main:app --reload
 
 # Production server
 uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+# Using Docker
+docker-compose up --build
+
+# Using Docker (background)
+docker-compose up -d --build
 ```
 
-### 5. Access the Application
+### 6. Access the Application
 
 - **API Documentation**: http://127.0.0.1:8000/docs
 - **Admin Interface**: http://127.0.0.1:8000/admin/ui
@@ -216,18 +243,35 @@ The application provides comprehensive logging:
 
 ### Docker
 
-```dockerfile
-FROM python:3.11-slim
+The project includes a complete Docker setup that automatically builds the Next.js frontend and serves it through FastAPI:
 
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+```bash
+# Build and run with Docker Compose
+docker-compose up --build
 
-COPY . .
-EXPOSE 8000
+# Run in background
+docker-compose up -d --build
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
 ```
+
+**Docker Features:**
+- **Automatic Frontend Building**: Next.js frontend is built during Docker image creation
+- **Static File Serving**: Built frontend files are automatically copied to FastAPI static directory
+- **Production Optimized**: Uses multi-stage build with Node.js for frontend and Python for backend
+- **Traefik Integration**: Pre-configured with Traefik labels for reverse proxy setup
+
+**Environment Variables for Docker:**
+- `QDRANT_API_KEY`: Your Qdrant API key
+- `QDRANT_URL`: Qdrant server URL
+- `GOOGLE_API_KEY`: Google AI API key
+- `QDRANT_COLLECTION`: Collection name (optional)
+- `QDRANT_DISTANCE`: Distance metric (optional)
+- `DEV_DISABLE_SSL_VERIFY`: Disable SSL verification for development (optional)
 
 ### Environment Setup
 
