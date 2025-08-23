@@ -188,8 +188,30 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    // Insert the chat bubble HTML into the page
-                    document.body.insertAdjacentHTML('beforeend', data.html);
+                    // Insert the chat bubble HTML into the page and execute its scripts
+                    (function insertAndRun(html) {
+                        const temp = document.createElement('div');
+                        temp.innerHTML = html;
+
+                        // Move non-script nodes into the document body
+                        Array.from(temp.childNodes).forEach((node) => {
+                            if (node.nodeName && node.nodeName.toLowerCase() === 'script') return;
+                            document.body.appendChild(node);
+                        });
+
+                        // Find and execute scripts (preserve src and inline)
+                        const scripts = temp.querySelectorAll('script');
+                        scripts.forEach((s) => {
+                            const newScript = document.createElement('script');
+                            if (s.src) {
+                                newScript.src = s.src;
+                                newScript.async = false; // preserve execution order
+                            } else {
+                                newScript.textContent = s.textContent || s.innerText || '';
+                            }
+                            document.body.appendChild(newScript);
+                        });
+                    })(data.html);
 
                     const placeholder = document.getElementById('chat-placeholder');
                     placeholder.innerHTML = '<div class="status connected">✅ Chat bubble loaded successfully!</div>';

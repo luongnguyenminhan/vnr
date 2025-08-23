@@ -102,7 +102,7 @@ class AIService:
                 "GOOGLE_API_KEY not set - both embeddings and chat will use stub data"
             )
 
-    def chunk_text(self, text: str, chunk_size: int = 1000) -> List[str]:
+    def chunk_text(self, text: str, chunk_size: int = 3000) -> List[str]:
         # naive chunker by characters
         return [text[i : i + chunk_size] for i in range(0, len(text), chunk_size)]
 

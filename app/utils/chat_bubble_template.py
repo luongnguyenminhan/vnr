@@ -375,6 +375,20 @@ CHAT_BUBBLE_HTML = """
     let isOpen = false;
     let conversationTurns = 0;
 
+    // Safe JSON parser: falls back to raw text when JSON parsing fails
+    async function safeParseJSON(response) {
+        try {
+            return await response.json();
+        } catch (err) {
+            try {
+                const text = await response.text();
+                return { __raw_text: text };
+            } catch (e) {
+                return { __raw_text: '' };
+            }
+        }
+    }
+
     // Auto-resize textarea
     input.addEventListener('input', function() {
         this.style.height = 'auto';
@@ -411,7 +425,7 @@ CHAT_BUBBLE_HTML = """
                 const response = await fetch(`/chat/conversation/${sessionId}`, {
                     method: 'DELETE'
                 });
-                const result = await response.json();
+                const result = await safeParseJSON(response);
 
                 if (response.ok) {
                     // Clear local messages (keep welcome message)
@@ -425,7 +439,8 @@ CHAT_BUBBLE_HTML = """
                     updateSessionInfo();
                     addMessage('Conversation history cleared successfully!', 'bot');
                 } else {
-                    addMessage('Failed to clear history: ' + result.detail, 'error');
+                    const detail = result.detail || result.__raw_text || 'Unknown error';
+                    addMessage('Failed to clear history: ' + detail, 'error');
                 }
             } catch (error) {
                 addMessage('Error clearing history: ' + error.message, 'error');
@@ -489,19 +504,27 @@ CHAT_BUBBLE_HTML = """
         panel.style.display = isOpen ? 'flex' : 'none';
         if (isOpen) {
             input.focus();
-            btn.classList.remove('notification');
-            updateSessionInfo(); // Update session info when opening
+                    const response = await fetch(`/chat/conversation/${sessionId}`);
+                    const result = await safeParseJSON(response);
         }
     }
-
-    btn.onclick = togglePanel;
-    closeBtn.onclick = function(e) {
-        e.stopPropagation();
-        togglePanel();
-    };
-
+                        const history = result.history || [];
+                        if (!history.length) {
+                            const raw = result.__raw_text;
+                            addMessage(raw ? `History: ${raw}` : 'No conversation history found.', 'bot');
+                        } else {
+                            let historyText = '📝 Conversation History:\n\n';
+                            history.forEach((turn, index) => {
+                                const date = new Date(turn.timestamp * 1000).toLocaleString();
+                                historyText += `Turn ${index + 1} (${date}):\n`;
+                                historyText += `User: ${turn.user}\n`;
+                                historyText += `AI: ${turn.ai}\n\n`;
+                            });
+                            addMessage(historyText, 'bot');
+                        }
     // Close panel when clicking outside
-    document.addEventListener('click', function(e) {
+                        const detail = result.detail || result.__raw_text || 'Unknown error';
+                        addMessage('Failed to retrieve history: ' + detail, 'error');
         if (isOpen && !panel.contains(e.target) && e.target !== btn) {
             togglePanel();
         }
@@ -568,7 +591,7 @@ CHAT_BUBBLE_HTML = """
                 })
             });
 
-            const data = await response.json();
+            const data = await safeParseJSON(response);
 
             if (response.ok) {
                 // Update session ID
@@ -583,14 +606,20 @@ CHAT_BUBBLE_HTML = """
 
                 // Remove typing indicator and add bot response
                 removeTyping();
-                addMessage(data.message || 'No response', 'bot', data.timestamp);
+                if (data && (data.message || data.__raw_text)) {
+                    const msg = data.message || data.__raw_text || 'No response';
+                    addMessage(msg, 'bot', data.timestamp);
+                } else {
+                    addMessage('No response from server.', 'bot', data.timestamp);
+                }
 
                 // Show notification if chat is closed
                 if (!isOpen) {
                     btn.classList.add('notification');
                 }
             } else {
-                throw new Error(data.detail || 'Request failed');
+                const detail = data.detail || data.__raw_text || 'Request failed';
+                throw new Error(detail);
             }
 
         } catch (error) {

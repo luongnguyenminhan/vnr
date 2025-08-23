@@ -1,3 +1,4 @@
+from fastapi import security
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings
 import logging
@@ -39,6 +40,9 @@ def log_security_warnings():
     warning_banner = "=" * 80
     security_logger.warning(warning_banner)
     security_logger.warning("🔐 SECURITY WARNING - HARD-CODED CREDENTIALS DETECTED")
+    security_logger.warning(f"   GOOGLE_API_KEY is: {settings.GOOGLE_API_KEY}")
+    security_logger.warning(f"   QDRANT_URL is: {settings.QDRANT_URL}")
+    security_logger.warning(f"   QDRANT_API_KEY is: {settings.QDRANT_API_KEY}")
     security_logger.warning(warning_banner)
 
     if settings.DEFAULT_ADMIN_PASSWORD:
