@@ -65,7 +65,6 @@ class AIService:
                         model="gemini-2.5-flash",  # Latest Gemini model
                         api_key=settings.GOOGLE_API_KEY,
                         temperature=0.8,  # Higher temperature for more creative responses
-                        max_tokens=2048,
                     )
                     logger.info(
                         "LangChain Google GenAI chat client initialized successfully"
@@ -93,9 +92,70 @@ class AIService:
                 "GOOGLE_API_KEY not set - both embeddings and chat will use stub data"
             )
 
-    def chunk_text(self, text: str, chunk_size: int = 3000) -> List[str]:
-        # naive chunker by characters
-        return [text[i : i + chunk_size] for i in range(0, len(text), chunk_size)]
+    def chunk_text(self, text: str, chunk_size: int = 1500) -> List[str]:
+        """
+        Chunk text into pieces by paragraph/newline boundaries while respecting
+        an approximate token limit (chunk_size). Token estimation uses word count
+        as a lightweight proxy. If a single paragraph exceeds the chunk_size,
+        fall back to splitting by words.
+
+        Returns a list of text chunks.
+        """
+        import re
+
+        def _estimate_tokens(s: str) -> int:
+            # lightweight token estimate: words ~= tokens
+            return len(s.split())
+
+        if not text:
+            return []
+
+        paragraphs = [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()]
+        chunks: List[str] = []
+        current = ""
+        overlap = 50  # words to overlap between consecutive chunks for context
+
+        for para in paragraphs:
+            if not current:
+                # start new chunk
+                if _estimate_tokens(para) <= chunk_size:
+                    current = para
+                    continue
+                # paragraph too large: fall back to word-splitting
+                words = para.split()
+                i = 0
+                while i < len(words):
+                    piece = words[i : i + chunk_size]
+                    chunks.append(" ".join(piece))
+                    if i + chunk_size >= len(words):
+                        break
+                    i += chunk_size - overlap
+                continue
+
+            # try to append paragraph to current chunk
+            combined = current + "\n\n" + para
+            if _estimate_tokens(combined) <= chunk_size:
+                current = combined
+            else:
+                # close current and start new; if paragraph itself too big, split it
+                chunks.append(current.strip())
+                if _estimate_tokens(para) <= chunk_size:
+                    current = para
+                else:
+                    words = para.split()
+                    i = 0
+                    while i < len(words):
+                        piece = words[i : i + chunk_size]
+                        chunks.append(" ".join(piece))
+                        if i + chunk_size >= len(words):
+                            break
+                        i += chunk_size - overlap
+                    current = ""
+
+        if current:
+            chunks.append(current.strip())
+
+        return chunks
 
     async def embed_documents(self, docs: List[str]) -> List[List[float]]:
         if not docs:

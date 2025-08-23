@@ -182,11 +182,11 @@ class QdrantService:
                 limit=top_k,
                 # Add search parameters for better results
                 search_params=qmodels.SearchParams(
-                    hnsw_ef=128,  # Higher value for better recall
+                    hnsw_ef=256,  # Higher value for better recall
                     exact=False,  # Use approximate search for speed
                 ),
             )
-
+            print(results)
             logger.info(
                 f"Successfully searched collection '{collection}' and found {len(results)} results"
             )
