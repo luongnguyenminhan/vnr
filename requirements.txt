@@ -16,7 +16,6 @@ langgraph>=0.2.35
 
 # Google AI services
 google-generativeai>=0.3.0
-google-genai>=0.3.0
 
 # Document processing
 langchain-unstructured>=0.1.0
