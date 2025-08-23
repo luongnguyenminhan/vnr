@@ -165,7 +165,7 @@ export default function FloatingBubbleChat() {
 
             {/* Chat Panel */}
             {isOpen && (
-                <div className="fixed bottom-24 right-6 w-[400px] h-full bg-white dark:bg-gray-800 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 z-40 flex flex-col">
+                <div className="fixed bottom-32 right-6 w-[500px] h-[70vh] bg-white dark:bg-gray-800 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 z-40 flex flex-col">
                     <ChatHeader
                         sessionId={sessionId}
                         conversationTurns={conversationTurns}
@@ -189,14 +189,6 @@ export default function FloatingBubbleChat() {
                         placeholder="Type your message..."
                     />
                 </div>
-            )}
-
-            {/* Backdrop */}
-            {isOpen && (
-                <div
-                    className="fixed inset-0 bg-black/20 z-30"
-                    onClick={() => setIsOpen(false)}
-                />
             )}
         </>
     );
