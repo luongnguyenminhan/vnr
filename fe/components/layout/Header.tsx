@@ -38,7 +38,7 @@ export default function Header({ title = "VNR AI Assistant", showNavigation = tr
                                 {title}
                             </h1>
                             <div className="text-xs text-gray-500 dark:text-gray-400">
-                                AI-powered chat assistant
+                                Trợ lý trò chuyện được hỗ trợ bởi AI
                             </div>
                         </div>
                     </Link>

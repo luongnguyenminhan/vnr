@@ -16,7 +16,7 @@ export default function TypingIndicator() {
                             style={{ animationDelay: '0.2s' }}
                         ></div>
                     </div>
-                    <span className="text-sm">AI is typing...</span>
+                    <span className="text-sm">AI đang gõ...</span>
                 </div>
             </div>
         </div>

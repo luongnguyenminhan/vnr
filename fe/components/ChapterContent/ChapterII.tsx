@@ -1,6 +1,6 @@
 'use client';
 
-import { FiClock, FiUser, FiMapPin, FiShield } from 'react-icons/fi';
+import { FiBook, FiClock, FiHeart, FiHome, FiMapPin, FiMusic, FiShield, FiTarget } from 'react-icons/fi';
 
 export default function ChapterII() {
     return (
@@ -26,8 +26,9 @@ export default function ChapterII() {
 
                     {/* Introduction */}
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-                        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-                            📖 Tổng Quan
+                        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                            <FiBook className="w-6 h-6" />
+                            Tổng Quan
                         </h2>
                         <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                             Sau khi nhà nước Âu Lạc bị nhà Triệu (Trung Quốc) xâm lược năm 179 TCN, dân tộc Việt Nam
@@ -42,7 +43,8 @@ export default function ChapterII() {
                         {/* Early Periods */}
                         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
                             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                                🏛️ Các Thời Kỳ Đầu
+                                <FiHome className="w-6 h-6" />
+                                Các Thời Kỳ Đầu
                             </h3>
                             <div className="space-y-3">
                                 <div className="border-l-4 border-blue-500 pl-4">
@@ -75,7 +77,8 @@ export default function ChapterII() {
                         {/* Later Periods */}
                         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
                             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                                🏛️ Các Thời Kỳ Sau
+                                <FiHome className="w-6 h-6" />
+                                Các Thời Kỳ Sau
                             </h3>
                             <div className="space-y-3">
                                 <div className="border-l-4 border-yellow-500 pl-4">
@@ -109,7 +112,8 @@ export default function ChapterII() {
                     {/* Major Resistance Movements */}
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
                         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                            ⚔️ Các Phong Trào Kháng Chiến Lớn
+                            <FiTarget className="w-6 h-6" />
+                            Các Phong Trào Kháng Chiến Lớn
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="border-l-4 border-red-500 pl-4">
@@ -154,25 +158,32 @@ export default function ChapterII() {
                     {/* Cultural Resistance */}
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
                         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                            🎨 Kháng Chiến Văn Hóa
+                            <FiMusic className="w-6 h-6" />
+                            Kháng Chiến Văn Hóa
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                                <div className="text-2xl mb-2">📚</div>
+                                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mb-2">
+                                    <FiBook className="w-4 h-4 text-white" />
+                                </div>
                                 <h4 className="font-medium text-gray-900 dark:text-white">Giữ Ngôn Ngữ</h4>
                                 <p className="text-sm text-gray-600 dark:text-gray-400">
                                     Bảo tồn tiếng Việt cổ đại
                                 </p>
                             </div>
                             <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                                <div className="text-2xl mb-2">🎭</div>
+                                <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center mb-2">
+                                    <FiMusic className="w-4 h-4 text-white" />
+                                </div>
                                 <h4 className="font-medium text-gray-900 dark:text-white">Duy Trì Phong Tục</h4>
                                 <p className="text-sm text-gray-600 dark:text-gray-400">
                                     Giữ bản sắc dân tộc
                                 </p>
                             </div>
                             <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-                                <div className="text-2xl mb-2">🏛️</div>
+                                <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center mb-2">
+                                    <FiHome className="w-4 h-4 text-white" />
+                                </div>
                                 <h4 className="font-medium text-gray-900 dark:text-white">Xây Đền Miếu</h4>
                                 <p className="text-sm text-gray-600 dark:text-gray-400">
                                     Tôn vinh các anh hùng dân tộc
@@ -184,7 +195,8 @@ export default function ChapterII() {
                     {/* Key Figures */}
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
                         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                            👑 Các Anh Hùng Dân Tộc
+                            <FiShield className="w-6 h-6" />
+                            Các Anh Hùng Dân Tộc
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="flex items-start gap-3">
@@ -249,7 +261,8 @@ export default function ChapterII() {
                     {/* Legacy */}
                     <div className="bg-gradient-to-r from-red-50 to-blue-50 dark:from-red-900/20 dark:to-blue-900/20 rounded-lg p-6">
                         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                            🌟 Di Sản và Bài Học
+                            <FiHeart className="w-6 h-6" />
+                            Di Sản và Bài Học
                         </h3>
                         <div className="space-y-3 text-gray-700 dark:text-gray-300">
                             <p className="flex items-start gap-3">

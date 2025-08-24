@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { FiMessageCircle, FiX } from 'react-icons/fi';
-import { ChatMessage as ChatMessageType, ChatResponse, ConversationTurn } from '@/types/chat.type';
 import { chatService } from '@/service';
+import { ChatMessage as ChatMessageType, ConversationTurn } from '@/types/chat.type';
+import { useEffect, useState } from 'react';
+import { FiMessageCircle, FiX } from 'react-icons/fi';
 import ChatHeader from './ChatHeader';
-import ChatMessages from './ChatMessages';
 import ChatInput from './ChatInput';
+import ChatMessages from './ChatMessages';
 
 
 export default function FloatingBubbleChat() {
@@ -70,7 +70,7 @@ export default function FloatingBubbleChat() {
     };
 
     const clearHistory = async () => {
-        if (!sessionId || !confirm('Clear conversation history? This cannot be undone.')) return;
+        if (!sessionId || !confirm('Xóa lịch sử cuộc trò chuyện? Hành động này không thể hoàn tác.')) return;
 
         try {
             await chatService.clearConversationHistory(sessionId);
@@ -81,7 +81,7 @@ export default function FloatingBubbleChat() {
             console.error('Failed to clear history:', error);
             const errorMessage: ChatMessageType = {
                 type: 'error',
-                content: `Failed to clear history: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                content: `Không thể xóa lịch sử: ${error instanceof Error ? error.message : 'Lỗi không xác định'}`,
                 timestamp: Date.now()
             };
             setMessages(prev => [...prev, errorMessage]);
@@ -93,7 +93,7 @@ export default function FloatingBubbleChat() {
         if (!sessionId) {
             setMessages(prev => [...prev, {
                 type: 'bot',
-                content: 'No active conversation session.',
+                content: 'Không có phiên trò chuyện hoạt động.',
                 timestamp: Date.now()
             }]);
             setShowMenu(false);
@@ -105,11 +105,11 @@ export default function FloatingBubbleChat() {
             const history = data.history || [];
 
             if (history.length) {
-                let historyText = '📝 Conversation History:\n\n';
+                let historyText = '📝 Lịch Sử Cuộc Trò Chuyện:\n\n';
                 history.forEach((turn: ConversationTurn, index: number) => {
                     const date = new Date(turn.timestamp * 1000).toLocaleString();
-                    historyText += `Turn ${index + 1} (${date}):\n`;
-                    historyText += `User: ${turn.user}\n`;
+                    historyText += `Lượt ${index + 1} (${date}):\n`;
+                    historyText += `Người dùng: ${turn.user}\n`;
                     historyText += `AI: ${turn.ai}\n\n`;
                 });
                 setMessages(prev => [...prev, {
@@ -120,7 +120,7 @@ export default function FloatingBubbleChat() {
             } else {
                 setMessages(prev => [...prev, {
                     type: 'bot',
-                    content: 'No conversation history found.',
+                    content: 'Không tìm thấy lịch sử cuộc trò chuyện.',
                     timestamp: Date.now()
                 }]);
             }
@@ -128,7 +128,7 @@ export default function FloatingBubbleChat() {
             console.error('Failed to retrieve history:', error);
             const errorMessage: ChatMessageType = {
                 type: 'error',
-                content: `Failed to retrieve history: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                content: `Không thể truy xuất lịch sử: ${error instanceof Error ? error.message : 'Lỗi không xác định'}`,
                 timestamp: Date.now()
             };
             setMessages(prev => [...prev, errorMessage]);
@@ -137,7 +137,7 @@ export default function FloatingBubbleChat() {
     };
 
     const startNewSession = () => {
-        if (confirm('Start a new conversation? Current history will be preserved.')) {
+        if (confirm('Bắt đầu cuộc trò chuyện mới? Lịch sử hiện tại sẽ được giữ lại.')) {
             setSessionId(null);
             localStorage.removeItem('rag_session_id');
             setConversationTurns(0);
@@ -153,7 +153,7 @@ export default function FloatingBubbleChat() {
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                     className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 transition-all duration-200"
-                    title="Open Chat Assistant"
+                    title="Mở Trợ Lý Chat"
                 >
                     {isOpen ? (
                         <FiX className="w-10 h-10" />

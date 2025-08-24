@@ -25,9 +25,9 @@ export default function ChatHeader({
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-t-lg">
             <div className="flex justify-between items-center">
                 <div>
-                    <h3 className="font-semibold">AI Assistant</h3>
+                    <h3 className="font-semibold">Trợ Lý AI</h3>
                     <div className="text-xs opacity-80">
-                        {sessionId ? `Session: ${sessionId.substring(0, 8)} (${conversationTurns} turns)` : 'New Session'}
+                        {sessionId ? `Phiên: ${sessionId.substring(0, 8)} (${conversationTurns} lượt)` : 'Phiên Mới'}
                     </div>
                 </div>
                 <div className="relative">
@@ -45,21 +45,21 @@ export default function ChatHeader({
                                 className="w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-600 flex items-center gap-2 text-gray-700 dark:text-gray-200"
                             >
                                 <span className="text-sm">📝</span>
-                                Show History
+                                Hiển Thị Lịch Sử
                             </button>
                             <button
                                 onClick={onStartNewSession}
                                 className="w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-600 flex items-center gap-2 text-gray-700 dark:text-gray-200"
                             >
                                 <span className="text-sm">🔄</span>
-                                New Session
+                                Buổi Trò Chuyện Mới
                             </button>
                             <button
                                 onClick={onClearHistory}
                                 className="w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-600 text-red-600 flex items-center gap-2"
                             >
                                 <span className="text-sm">🗑️</span>
-                                Clear History
+                                Xóa Lịch Sử
                             </button>
                         </div>
                     )}

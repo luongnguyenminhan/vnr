@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, ChangeEvent, KeyboardEvent } from 'react';
+import { ChangeEvent, KeyboardEvent, useRef } from 'react';
 import { FiSend } from 'react-icons/fi';
 
 interface ChatInputProps {
@@ -16,7 +16,7 @@ export default function ChatInput({
     onChange,
     onSend,
     isLoading,
-    placeholder = "Type your message..."
+    placeholder = "Nhập tin nhắn của bạn..."
 }: ChatInputProps) {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
