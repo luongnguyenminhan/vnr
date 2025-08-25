@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { FiMenu, FiX, FiBook } from 'react-icons/fi';
 
-type ChapterType = 'chapter1' | 'chapter2';
+type ChapterType = 'chapter1' | 'chapter2' | 'chapter3' | 'chapter4';
 
 interface HeaderProps {
     title?: string;
@@ -22,6 +22,8 @@ export default function Header({ title = "VNR AI Assistant", showNavigation = tr
     const navigation = [
         { name: 'Chapter I', href: 'chapter1' as ChapterType, icon: FiBook, isChapter: true },
         { name: 'Chapter II', href: 'chapter2' as ChapterType, icon: FiBook, isChapter: true },
+        { name: 'Chapter III', href: 'chapter3' as ChapterType, icon: FiBook, isChapter: true },
+        { name: 'Chapter IV', href: 'chapter4' as ChapterType, icon: FiBook, isChapter: true },
     ];
 
     return (

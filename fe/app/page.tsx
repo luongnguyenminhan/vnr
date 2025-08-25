@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { FloatingBubbleChat } from '@/components/chat';
 import { Header } from '@/components/layout';
-import { ChapterI, ChapterII } from '@/components/ChapterContent';
+import { ChapterI, ChapterII, ChapterIII, ChapterIV } from '@/components/ChapterContent';
 
-type ChapterType = 'chapter1' | 'chapter2';
+type ChapterType = 'chapter1' | 'chapter2' | 'chapter3' | 'chapter4';
 
 export default function Home() {
   const [currentChapter, setCurrentChapter] = useState<ChapterType>('chapter1');
@@ -22,6 +22,8 @@ export default function Home() {
 
       {currentChapter === 'chapter1' && <ChapterI />}
       {currentChapter === 'chapter2' && <ChapterII />}
+      {currentChapter === 'chapter3' && <ChapterIII />}
+      {currentChapter === 'chapter4' && <ChapterIV />}
 
       {/* Floating Chat Component */}
       <FloatingBubbleChat />
