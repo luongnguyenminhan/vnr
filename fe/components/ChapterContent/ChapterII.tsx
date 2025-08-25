@@ -1,231 +1,229 @@
 'use client';
 
-import { FiBook, FiClock, FiHeart, FiHome, FiMap, FiShield, FiTarget, FiTrendingUp, FiRefreshCw } from 'react-icons/fi';
+import { FiBook, FiHeart, FiHome, FiShield, FiTarget, FiTrendingUp, FiDollarSign, FiAward, FiRefreshCw, FiAlertTriangle } from 'react-icons/fi';
 import Card from '../ui/Card';
 
 export default function ChapterII() {
     // Card data structure
     const cardsData = [
-        // Header card (spans 12 columns)
+        // Main Header
         {
             type: 'text' as const,
-            data: `# Chương II: Bước Ngoặt Lịch Sử - Công Cuộc Đổi Mới và Tầm Nhìn Chiến Lược
-
-## Công Cuộc Đổi Mới
-
-Công cuộc Đổi mới được chính thức khởi xướng từ Đại hội Đảng Cộng sản Việt Nam lần thứ VI vào tháng 12 năm 1986. Đây không phải là một sự thay đổi đột ngột mà là một bước ngoặt lịch sử mang tính tất yếu, được thúc đẩy bởi sự thất bại toàn diện của các chính sách kinh tế thời kỳ Bao cấp.`,
-            title: "Tổng Quan Chương II",
-            icon: <FiBook className="w-5 h-5" />,
+            data: `# Chương II: Bước Ngoặt Lịch Sử - Đường Lối Đổi Mới (1986)
+## Tổng Quan Công Cuộc Đổi Mới
+Đại hội đại biểu toàn quốc lần thứ VI của Đảng Cộng sản Việt Nam (tháng 12/1986) đã trở thành một bước ngoặt lịch sử, mở ra kỷ nguyên Đổi mới toàn diện đất nước. Đây là thời điểm mà Đảng đã có sự chuyển biến mạnh mẽ trong tư duy lãnh đạo, từ việc duy trì nền kinh tế kế hoạch hóa sang nền kinh tế thị trường định hướng xã hội chủ nghĩa. Sự chuyển mình này không phải là kết quả của ngẫu nhiên mà là sản phẩm của sự kiên trì, sáng tạo và khát vọng vươn lên của toàn dân tộc.`,
+            title: "Chương II: Đường Lối Đổi Mới",
+            icon: <FiBook className="w-6 h-6" />,
+            className: "col-span-12 text-2xl leading-relaxed"
+        },
+        {
+            type: 'image' as const,
+            data: 'https://imgnvsk.vnanet.vn/MediaUpload/Org/2023/08/19/dhvi-619-16-48-13.png',
+            title: "Đại Hội Đảng Lần Thứ VI - Bước Ngoặt Vĩ Đại",
+            icon: <FiTarget className="w-6 h-6" />,
             className: "col-span-12"
         },
 
-        // Introduction (spans 8 columns)
+        // Section 2.1: Foundation and Necessity of Doi Moi
         {
             type: 'text' as const,
-            data: `Các tài liệu lịch sử nhấn mạnh rằng "sự thúc đẩy của người dân buộc nhà cầm quyền cộng sản phải tiến hành cởi trói nền kinh tế". Điều này cho thấy Đổi mới là một phản ứng cần thiết trước cuộc khủng hoảng kinh tế-xã hội trầm trọng và những đòi hỏi cấp bách từ thực tiễn đời sống.
+            data: `## 2.1. Nền Tảng và Sự Cần Thiết của Đổi Mới
 
-Công cuộc Đổi mới không chỉ là một cuộc cải cách đơn thuần mà là một quyết định chiến lược, mở đường cho sự phát triển vượt bậc của đất nước. Sự "cởi trói" nền kinh tế đã tạo ra động lực phát triển mới, đặt nền móng cho những thành tựu vĩ đại sau này.`,
-            title: "Bối Cảnh Khởi Xướng",
-            icon: <FiClock className="w-5 h-5" />,
-            className: "col-span-8"
+Cuộc khủng hoảng kinh tế-xã hội trầm trọng vào cuối thập niên 70, đầu 80 đã cho thấy những hạn chế và sai lầm của mô hình kinh tế cũ. Các mục tiêu kinh tế không đạt được, giá cả tăng vọt, đời sống nhân dân vô cùng khó khăn, thể hiện sự bế tắc của cơ chế kế hoạch hóa tập trung.
+
+**Những biểu hiện của khủng hoảng:**
+- **Kinh tế trì trệ:** Các mục tiêu Đại hội IV không đạt được
+- **Giá cả tăng vọt:** Lạm phát phi mã
+- **Đời sống khó khăn:** Nhân dân thiếu thốn vật chất
+- **Bế tắc cơ chế:** Mô hình kế hoạch hóa tập trung đã lỗi thời`,
+            title: "2.1. Nền Tảng và Sự Cần Thiết",
+            icon: <FiAlertTriangle className="w-6 h-6" />,
+            className: "col-span-12 text-xl leading-relaxed"
+        },
+        {
+            type: 'text' as const,
+            data: `## Những Bước Đi Đột Phá Trước Khi Chính Thức Đổi Mới
+
+Trước khi chính thức khởi xướng công cuộc Đổi mới tại Đại hội VI, Đảng và Nhà nước đã có những bước đi đột phá, thử nghiệm để tìm ra con đường thoát khỏi khủng hoảng.
+
+**Những bước đi quan trọng:**
+- **Hội nghị Trung ương 6 (1979):** Khắc phục khuyết điểm, "sản xuất bung ra"
+- **Chỉ thị 100-CT/TW (1981):** Khoán sản phẩm trong nông nghiệp
+- **Phong trào quần chúng:** Tạo ra sự tăng trưởng đáng kể
+
+**Ý nghĩa của những bước đi này:**
+- Tạo tiền đề quan trọng cho nhận thức mới
+- Thử nghiệm các phương thức quản lý mới
+- Giải phóng sức sản xuất trong phạm vi nhất định
+- Tạo động lực cho công cuộc Đổi mới toàn diện`,
+            title: "Những Bước Đi Đột Phá Trước Đổi Mới",
+            icon: <FiRefreshCw className="w-6 h-6" />,
+            className: "col-span-12 md:col-span-6 text-xl leading-relaxed"
+        },
+        {
+            type: 'image' as const,
+            data: 'https://i-kinhdoanh.vnecdn.net/2016/12/15/mua-hang-thoi-bao-cap-0-9267-1481774665.jpg',
+            title: "Khủng hoảng kinh tế thập niên 1980",
+            icon: <FiTrendingUp className="w-6 h-6" />,
+            className: "col-span-12 md:col-span-4"
+        },
+        {
+            type: 'image' as const,
+            data: 'https://placehold.co/800x600/4CAF50/FFFFFF?text=Chỉ+Thị+100+1981',
+            title: "Chỉ thị 100-CT/TW (1981) - Khoán sản phẩm",
+            icon: <FiTarget className="w-6 h-6" />,
+            className: "col-span-12 md:col-span-6"
+        },
+        {
+            type: 'text' as const,
+            data: `**Đường lối Đổi mới được hình thành trên cơ sở:**
+
+- **Tổng kết thực tiễn:** Cách mạng Việt Nam qua 30 năm
+- **Vận dụng sáng tạo:** Chủ nghĩa Mác-Lênin
+- **Tiếp thu kinh nghiệm:** Cách mạng thế giới
+- **Nhận thức mới:** Về chủ nghĩa xã hội trong thời đại mới
+
+**Sự phát triển của cuộc cách mạng khoa học và công nghệ:**
+- **"Kiểu dòng thác":** Sự bùng nổ công nghệ cuối thế kỷ XX
+- **Yêu cầu mới:** Phải có cách nhìn mới, nhận thức mới
+- **Quyết định chiến lược:** Thay đổi để tồn tại và phát triển
+
+**Mặc dù những thử nghiệm trước đó chưa đủ để giải quyết tận gốc cuộc khủng hoảng, chúng đã tạo tiền đề quan trọng, giúp Đảng có được những nhận thức mới và định hình đường lối Đổi mới một cách toàn diện hơn.**`,
+            title: "Tổng Kết Thực Tiễn và Nhận Thức Mới",
+            icon: <FiTarget className="w-6 h-6" />,
+            className: "col-span-12 md:col-span-8 text-xl leading-relaxed"
+        },
+        {
+            type: 'image' as const,
+            data: 'https://placehold.co/800x600/4CAF50/FFFFFF?text=Hội+Nghị+Trung+Ương+6+1979',
+            title: "Hội nghị Trung ương 6 - Bước đầu đổi mới",
+            icon: <FiRefreshCw className="w-6 h-6" />,
+            className: "col-span-12 md:col-span-4"
         },
 
-        // Key Reforms (spans 4 columns)
+        // Section 2.2: Pillars of Doi Moi Policy
         {
             type: 'text' as const,
-            data: `## Nội Dung Cốt Lõi
+            data: `## 2.2. Các Trụ Cột của Đường Lối Đổi Mới
 
-- **Thời gian:** Từ năm 1986
-- **Tính chất:** Chuyển đổi từ kế hoạch hóa sang thị trường
-- **Mục tiêu:** "Nền kinh tế thị trường định hướng xã hội chủ nghĩa"
-- **Tầm nhìn:** "Đổi mới tư duy lãnh đạo"`,
-            title: "Đổi Mới Về Cơ Bản",
-            icon: <FiRefreshCw className="w-5 h-5" />,
-            className: "col-span-4"
+Đường lối Đổi mới do Đại hội VI (1986) đề ra đã xác định một nguyên tắc cốt lõi: **đổi mới phải toàn diện và đồng bộ, nhưng lấy đổi mới kinh tế làm trọng tâm**.
+
+**Triết lý cốt lõi:**
+- **Nhận thức đúng vấn đề:** Khủng hoảng cốt lõi là sự trì trệ của kinh tế và cơ chế quản lý
+- **Tập trung giải phóng sức sản xuất:** Đổi mới kinh tế trước, tạo nền tảng cho các đổi mới khác
+- **Đồng bộ và toàn diện:** Các mặt kinh tế, chính trị, văn hóa, xã hội phát triển hài hòa
+
+**Việc lựa chọn "đổi mới tư duy" làm bước đột phá và lấy "đổi mới kinh tế làm trọng tâm" là một lựa chọn chiến lược then chốt, đã giải phóng sức sản xuất, tạo động lực cho sự phát triển chưa từng có trong lịch sử dân tộc.**`,
+            title: "2.2. Các Trụ Cột Của Đường Lối Đổi Mới",
+            icon: <FiShield className="w-6 h-6" />,
+            className: "col-span-12 md:col-span-8 text-xl leading-relaxed"
+        },
+        {
+            type: 'image' as const,
+            data: 'https://placehold.co/800x600/FF9800/FFFFFF?text=Đổi+Mới+Tư+Duy',
+            title: "Đổi mới tư duy - Bước đột phá chiến lược",
+            icon: <FiRefreshCw className="w-6 h-6" />,
+            className: "col-span-12 md:col-span-4"
+        },
+        {
+            type: 'text' as const,
+            data: `**Về kinh tế - Trọng tâm của Đổi mới:**
+
+- **Xóa bỏ cơ chế cũ:** Kế hoạch hóa tập trung, quan liêu, bao cấp
+- **Hình thành cơ chế mới:** Thị trường có sự quản lý của Nhà nước
+- **Phát triển nền kinh tế:** Hàng hóa nhiều thành phần theo định hướng xã hội chủ nghĩa
+- **Mở rộng quan hệ kinh tế:** Đối ngoại rộng mở
+
+**Về chính trị - Đổi mới chủ động và vững chắc:**
+
+- **Xây dựng Nhà nước pháp quyền:** "Của dân, do dân, vì dân"
+- **Thực hiện nền dân chủ:** Xã hội chủ nghĩa, không đa nguyên chính trị
+- **Phù hợp với đổi mới kinh tế:** Đổi mới chính trị theo kịp kinh tế
+- **Tăng cường vai trò lãnh đạo:** Của Đảng trong nền kinh tế thị trường`,
+            title: "Đổi Mới Kinh Tế - Trọng Tâm",
+            icon: <FiDollarSign className="w-6 h-6" />,
+            className: "col-span-12 md:col-span-6 text-xl leading-relaxed"
+        },
+        {
+            type: 'image' as const,
+            data: 'https://placehold.co/800x600/2196F3/FFFFFF?text=Nền+kinh+tế+hàng+hóa+nhiều+thành+phần',
+            title: "Nền kinh tế hàng hóa nhiều thành phần",
+            icon: <FiTrendingUp className="w-6 h-6" />,
+            className: "col-span-12 md:col-span-6"
+        },
+        {
+            type: 'text' as const,
+            data: `**Về văn hóa - Xã hội:**
+
+- **Đổi mới văn hóa:** Xây dựng nền văn hóa tiên tiến, đậm đà bản sắc dân tộc
+- **Cải thiện đời sống:** Nhân dân là mục tiêu, động lực và chủ thể của đổi mới
+- **Đảm bảo công bằng xã hội:** Giảm nghèo, tạo việc làm, phát triển bền vững
+- **Phát huy sức mạnh toàn dân tộc:** Trong công cuộc đổi mới và phát triển
+
+**Những nguyên tắc cơ bản:**
+
+- **Toàn diện nhưng có trọng tâm:** Kinh tế là trọng tâm, các mặt khác hỗ trợ
+- **Đồng bộ và có kế thừa:** Giữ vững những thành tựu, đổi mới những hạn chế
+- **Tự lực tự cường:** Phát huy nội lực, tranh thủ ngoại lực
+- **Thực tiễn là tiêu chuẩn:** Kiểm nghiệm bằng thực tiễn cách mạng Việt Nam`,
+            title: "Đổi Mới Văn Hóa - Xã Hội",
+            icon: <FiHeart className="w-6 h-6" />,
+            className: "col-span-12 md:col-span-6 text-xl leading-relaxed"
+        },
+        {
+            type: 'image' as const,
+            data: 'https://placehold.co/800x600/9C27B0/FFFFFF?text=Văn+Hóa+Việt+Nam+Tiên+Tiến',
+            title: "Văn hóa Việt Nam tiên tiến, đậm đà bản sắc",
+            icon: <FiHome className="w-6 h-6" />,
+            className: "col-span-12 md:col-span-6"
         },
 
-        // Economic Transformation (spans 12 columns)
+        // Conclusion - Chapter Summary
         {
             type: 'text' as const,
-            data: `## Sự Chuyển Đổi Về Kinh Tế
+            data: `## Kết Luận Chương II: Ý Nghĩa Lịch Sử của Đường Lối Đổi Mới
 
-Nội dung cốt lõi của Đổi mới là sự chuyển dịch từ nền kinh tế kế hoạch hóa sang "nền kinh tế thị trường định hướng xã hội chủ nghĩa". Tuy nhiên, sự thay đổi không chỉ giới hạn ở phương diện kinh tế mà còn là một cuộc "đổi mới tư duy lãnh đạo" của Đảng Cộng sản Việt Nam.
+Đường lối Đổi mới do Đại hội VI (1986) đề ra không chỉ là một quyết định chiến lược thông thường mà là một bước ngoặt lịch sử mang tính quyết định đối với số phận dân tộc.
 
-Bằng việc "nhìn thẳng vào sự thật, nói rõ sự thật, nói đúng sự thật" và thừa nhận kinh tế hàng hóa nhiều thành phần là một chính sách có ý nghĩa chiến lược lâu dài, Công cuộc Đổi mới đã trực tiếp "giải phóng được lực lượng sản xuất" và "khơi dậy sức mạnh toàn dân".`,
-            title: "Chuyển Đổi Kinh Tế",
-            icon: <FiTrendingUp className="w-5 h-5" />,
-            className: "col-span-12"
-        },
+**Những thành tựu cốt lõi:**
 
-        // Strategic Vision (spans 6 columns)
-        {
-            type: 'text' as const,
-            data: `## Tầm Nhìn Chiến Lược
+- **Giải phóng sức sản xuất:** Đổi mới kinh tế làm trọng tâm
+- **Thay đổi tư duy lãnh đạo:** Từ kế hoạch hóa sang thị trường
+- **Đồng bộ và toàn diện:** Các mặt kinh tế, chính trị, văn hóa, xã hội
+- **Tự lực tự cường:** Phát huy nội lực, tranh thủ ngoại lực
 
-### Tư Duy Đổi Mới
-- **Nhìn thẳng vào sự thật:** Thừa nhận những sai lầm
-- **Nói rõ sự thật:** Đặt vấn đề thẳng thắn
-- **Nói đúng sự thật:** Đề xuất giải pháp cụ thể
-
-### Giải Phóng Sản Xuất
-- **Lực lượng sản xuất:** Khơi dậy tiềm năng kinh tế
-- **Sức mạnh toàn dân:** Động viên nhân dân tham gia
-- **Tư duy đổi mới:** Chuyển biến nhận thức lãnh đạo
-
-### Hướng Đi Mới
-- Từ kinh tế kế hoạch sang thị trường
-- Từ tập trung sang phân tán
-- Từ khép kín sang hội nhập`,
-            title: "Tầm Nhìn Chiến Lược",
-            icon: <FiTarget className="w-5 h-5" />,
-            className: "col-span-6"
-        },
-
-        // Historical Significance (spans 6 columns)
-        {
-            type: 'text' as const,
-            data: `## Ý Nghĩa Lịch Sử
-
-### Bước Ngoặt Tất Yếu
-- **Thất bại của Bao cấp:** Tạo động lực thay đổi
-- **Đòi hỏi của nhân dân:** Áp lực từ thực tiễn
-- **Quyết định chiến lược:** Chuyển hướng phát triển
-
-### Sự Khác Biệt
-- **Trước 1986:** Kế hoạch hóa tập trung
-- **Sau 1986:** Thị trường định hướng xã hội chủ nghĩa
-- **Kết quả:** Sự "cởi trói" nền kinh tế
-
-### Tầm Quan Trọng
-- Đánh dấu sự chuyển mình của Việt Nam
-- Mở đường cho hội nhập toàn cầu
-- Tạo nền tảng cho mọi thành tựu hiện tại`,
-            title: "Ý Nghĩa Lịch Sử",
-            icon: <FiShield className="w-5 h-5" />,
-            className: "col-span-6"
-        },
-
-        // Transformation Process (spans 8 columns)
-        {
-            type: 'text' as const,
-            data: `## Quá Trình Chuyển Mình
-
-Đổi mới được nhìn nhận là một quá trình "tìm tòi, khám phá và sáng tạo", tương tự như việc áp dụng lại mô hình Chính sách kinh tế mới (NEP) của Lenin. Bước chuyển mình này không chỉ là một cuộc cải cách đơn thuần mà là một quyết định chiến lược.
-
-Sự "cởi trói" nền kinh tế đã biến Việt Nam từ một quốc gia thiếu thốn, khép kín trở thành một nền kinh tế năng động và hội nhập sâu rộng. Những thành tựu vĩ đại của Việt Nam hôm nay đều bắt nguồn từ quyết định đúng đắn này.`,
-            title: "Quá Trình Chuyển Mình",
-            icon: <FiRefreshCw className="w-5 h-5" />,
-            className: "col-span-8"
-        },
-
-        // Key Principles (spans 4 columns)
-        {
-            type: 'text' as const,
-            data: `## Nguyên Tắc Cốt Lõi
-
-### Định Hướng Xã Hội Chủ Nghĩa
-- **Thị trường:** Cơ chế phân bổ tài nguyên
-- **Định hướng:** Đảm bảo công bằng xã hội
-- **Nhiều thành phần:** Phát triển kinh tế đa dạng
-
-### Phát Triển Bền Vững
-- **Kinh tế:** Tăng trưởng ổn định
-- **Xã hội:** Cải thiện đời sống
-- **Môi trường:** Bảo vệ tài nguyên
-
-### Tư Duy Đổi Mới
-- **Nhìn thẳng vào sự thật:** Thừa nhận sai lầm
-- **Nói rõ sự thật:** Đặt vấn đề thẳng thắn
-- **Nói đúng sự thật:** Đề xuất giải pháp cụ thể`,
-            title: "Nguyên Tắc Cốt Lõi",
-            icon: <FiHome className="w-5 h-5" />,
-            className: "col-span-4"
-        },
-
-        // Strategic Implementation (spans 8 columns)
-        {
-            type: 'text' as const,
-            data: `## Chiến Lược Thực Thi
-
-### Sự "Cởi Trói" Nền Kinh Tế
-- Từ nền kinh tế kế hoạch tập trung
-- Chuyển sang nền kinh tế thị trường
-- Giải phóng lực lượng sản xuất
-- Khơi dậy sức mạnh toàn dân
-
-### Quá Trình Tìm Tòi, Khám Phá
-- Học hỏi từ mô hình NEP của Lenin
-- Áp dụng sáng tạo vào điều kiện Việt Nam
-- Thử nghiệm và điều chỉnh linh hoạt
-- Đảm bảo phù hợp với thực tiễn
-
-### Bước Chuyển Mình Vĩ Đại
+**Sự chuyển mình lịch sử:**
+- Từ khủng hoảng kinh tế-xã hội trầm trọng
+- Sang nền kinh tế thị trường định hướng xã hội chủ nghĩa
 - Từ quốc gia thiếu thốn, khép kín
-- Trở thành nền kinh tế năng động, hội nhập
-- Tham gia sâu rộng vào nền kinh tế toàn cầu
-- Tạo nền tảng cho mọi thành tựu hiện tại`,
-            title: "Chiến Lược Thực Thi",
-            icon: <FiTarget className="w-5 h-5" />,
-            className: "col-span-8"
+- Sang nền kinh tế năng động, hội nhập quốc tế
+
+**Bài học quý giá:**
+- **Nhận thức đúng thực tiễn:** Khủng hoảng là động lực thay đổi
+- **Tổng kết sáng tạo:** Vận dụng chủ nghĩa Mác-Lênin vào điều kiện Việt Nam
+- **Quyết tâm chính trị:** Dũng cảm thay đổi để tồn tại và phát triển
+- **Tầm nhìn chiến lược:** Đặt lợi ích quốc gia, dân tộc lên trên hết
+
+Đường lối Đổi mới đã mở ra kỷ nguyên mới cho đất nước, tạo nền tảng vững chắc cho mọi thành tựu vĩ đại của Việt Nam hiện nay.`,
+            title: "Kết Luận Chương II",
+            icon: <FiHeart className="w-6 h-6" />,
+            className: "col-span-12 text-2xl leading-relaxed"
         },
 
-        // Historical Context (spans 4 columns)
-        {
-            type: 'text' as const,
-            data: `## Bối Cảnh Lịch Sử
-
-### Động Lực Thay Đổi
-- Thất bại của cơ chế Bao cấp
-- Khủng hoảng kinh tế-xã hội trầm trọng
-- Đòi hỏi cấp bách từ thực tiễn
-- Áp lực từ người dân
-
-### Quyết Định Chiến Lược
-- Đại hội Đảng Cộng sản Việt Nam lần thứ VI
-- Tháng 12 năm 1986
-- Bước ngoặt lịch sử tất yếu
-- Đánh dấu sự chuyển mình của Việt Nam`,
-            title: "Bối Cảnh Lịch Sử",
-            icon: <FiClock className="w-5 h-5" />,
-            className: "col-span-4"
-        },
-
-        // Image placeholders
+        // Final images
         {
             type: 'image' as const,
-            data: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop',
-            title: "Đại hội Đảng lần thứ VI",
-            icon: <FiBook className="w-5 h-5" />,
-            className: "col-span-4"
+            data: 'https://placehold.co/800x600/4CAF50/FFFFFF?text=Viet+Nam+Sau+Đoi+Moi',
+            title: "Việt Nam sau Đổi mới - Phát triển vượt bậc",
+            icon: <FiTarget className="w-6 h-6" />,
+            className: "col-span-12 md:col-span-6"
         },
         {
             type: 'image' as const,
-            data: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
-            title: "Phát triển kinh tế",
-            icon: <FiTrendingUp className="w-5 h-5" />,
-            className: "col-span-4"
-        },
-        {
-            type: 'image' as const,
-            data: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop',
-            title: "Hội nhập kinh tế",
-            icon: <FiMap className="w-5 h-5" />,
-            className: "col-span-4"
-        },
-
-        // Legacy and Impact (spans 12 columns)
-        {
-            type: 'text' as const,
-            data: `## Di Sản và Tác Động
-
-Công cuộc Đổi mới đã tạo ra một sự đối lập hoàn toàn so với thời kỳ Bao cấp. Những thành tựu phi thường về kinh tế và xã hội là luận cứ vững chắc nhất để khẳng định rằng Việt Nam chưa bao giờ có được một "cơ đồ" và "tiềm lực" như ngày nay.
-
-Từ một nền kinh tế trì trệ với lạm phát 774,7% năm 1986, Việt Nam đã duy trì mức tăng trưởng trung bình ấn tượng, khoảng 7% mỗi năm. GDP bình quân đầu người đã tăng từ vài trăm USD lên 4.110 USD năm 2022, tương đương với việc tăng "gấp khoảng 38 lần" chỉ trong hơn ba thập kỷ.
-
-Công cuộc Đổi mới không chỉ đơn thuần là một cuộc cải cách kinh tế, mà còn là sự giải phóng toàn diện các tiềm năng của đất nước và con người, tạo ra nền tảng vững chắc cho mọi thành tựu hiện tại.`,
-            title: "Di Sản và Tác Động",
-            icon: <FiHeart className="w-5 h-5" />,
-            className: "col-span-12"
+            data: 'https://placehold.co/800x600/2196F3/FFFFFF?text=Tương+Lai+Phát+Triển+Bền+Vững',
+            title: "Tương lai phát triển bền vững",
+            icon: <FiAward className="w-6 h-6" />,
+            className: "col-span-12 md:col-span-6"
         }
     ];
 
@@ -233,7 +231,7 @@ Công cuộc Đổi mới không chỉ đơn thuần là một cuộc cải các
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex justify-center items-center">
             <div className="w-[70%] py-4">
                 {/* 12-column grid container */}
-                <div className="grid grid-cols-12 gap-4 auto-rows-fr">
+                <div className="grid grid-cols-12 gap-4 ">
                     {cardsData.map((cardData, index) => (
                         <Card
                             key={index}
