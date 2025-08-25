@@ -281,8 +281,8 @@ Sự thăng hạng về danh tiếng trên các bảng xếp hạng quốc tế 
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
-            <div className="w-full px-32 py-4">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex justify-center items-center">
+            <div className="w-[60%] py-4">
                 {/* 12-column grid container */}
                 <div className="grid grid-cols-12 gap-4 auto-rows-fr">
                     {cardsData.map((cardData, index) => (

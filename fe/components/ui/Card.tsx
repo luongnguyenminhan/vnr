@@ -10,6 +10,13 @@ interface CardProps {
         title?: string;
         icon?: React.ReactNode;
         className?: string;
+        // Image customization props
+        imageClassName?: string;
+        imageContainerClassName?: string;
+        imageStyle?: React.CSSProperties;
+        imageFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
+        imageWidth?: string | number;
+        imageHeight?: string | number;
     };
     className?: string;
 }
@@ -55,8 +62,8 @@ function parseMarkdown(text: string): React.ReactNode[] {
                 elements.push(
                     <ul key={`list-${index}`} className="space-y-1 mb-3">
                         {currentList.map((item, itemIndex) => (
-                            <li key={itemIndex} className="text-gray-700 dark:text-gray-300 flex items-start gap-2">
-                                <span className="text-blue-600 dark:text-blue-400 mt-1.5">•</span>
+                            <li key={itemIndex} className="text-lg text-gray-700 dark:text-gray-300 flex items-start gap-2">
+                                <span className="text-blue-600 dark:text-blue-400 mt-1.5 text-xl">•</span>
                                 <span>{parseInlineMarkdown(item)}</span>
                             </li>
                         ))}
@@ -75,8 +82,8 @@ function parseMarkdown(text: string): React.ReactNode[] {
                 elements.push(
                     <ul key={`list-${index}`} className="space-y-1 mb-3">
                         {currentList.map((item, itemIndex) => (
-                            <li key={itemIndex} className="text-gray-700 dark:text-gray-300 flex items-start gap-2">
-                                <span className="text-blue-600 dark:text-blue-400 mt-1.5">•</span>
+                            <li key={itemIndex} className="text-lg text-gray-700 dark:text-gray-300 flex items-start gap-2">
+                                <span className="text-blue-600 dark:text-blue-400 mt-1.5 text-xl">•</span>
                                 <span>{parseInlineMarkdown(item)}</span>
                             </li>
                         ))}
@@ -86,7 +93,7 @@ function parseMarkdown(text: string): React.ReactNode[] {
                 inList = false;
             }
             elements.push(
-                <h1 key={index} className="text-xl font-bold text-gray-900 dark:text-white mb-3 border-b border-gray-200 dark:border-gray-600 pb-2">
+                <h1 key={index} className="text-3xl font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-600 pb-3">
                     {parseInlineMarkdown(trimmedLine.substring(2))}
                 </h1>
             );
@@ -95,8 +102,8 @@ function parseMarkdown(text: string): React.ReactNode[] {
                 elements.push(
                     <ul key={`list-${index}`} className="space-y-1 mb-3">
                         {currentList.map((item, itemIndex) => (
-                            <li key={itemIndex} className="text-gray-700 dark:text-gray-300 flex items-start gap-2">
-                                <span className="text-blue-600 dark:text-blue-400 mt-1.5">•</span>
+                            <li key={itemIndex} className="text-lg text-gray-700 dark:text-gray-300 flex items-start gap-2">
+                                <span className="text-blue-600 dark:text-blue-400 mt-1.5 text-xl">•</span>
                                 <span>{parseInlineMarkdown(item)}</span>
                             </li>
                         ))}
@@ -106,7 +113,7 @@ function parseMarkdown(text: string): React.ReactNode[] {
                 inList = false;
             }
             elements.push(
-                <h2 key={index} className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                <h2 key={index} className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
                     {parseInlineMarkdown(trimmedLine.substring(3))}
                 </h2>
             );
@@ -115,8 +122,8 @@ function parseMarkdown(text: string): React.ReactNode[] {
                 elements.push(
                     <ul key={`list-${index}`} className="space-y-1 mb-3">
                         {currentList.map((item, itemIndex) => (
-                            <li key={itemIndex} className="text-gray-700 dark:text-gray-300 flex items-start gap-2">
-                                <span className="text-blue-600 dark:text-blue-400 mt-1.5">•</span>
+                            <li key={itemIndex} className="text-lg text-gray-700 dark:text-gray-300 flex items-start gap-2">
+                                <span className="text-blue-600 dark:text-blue-400 mt-1.5 text-xl">•</span>
                                 <span>{parseInlineMarkdown(item)}</span>
                             </li>
                         ))}
@@ -126,7 +133,7 @@ function parseMarkdown(text: string): React.ReactNode[] {
                 inList = false;
             }
             elements.push(
-                <h3 key={index} className="text-base font-medium text-gray-900 dark:text-white mb-2">
+                <h3 key={index} className="text-lg font-medium text-gray-900 dark:text-white mb-3">
                     {parseInlineMarkdown(trimmedLine.substring(4))}
                 </h3>
             );
@@ -142,8 +149,8 @@ function parseMarkdown(text: string): React.ReactNode[] {
                 elements.push(
                     <ul key={`list-${index}`} className="space-y-1 mb-3">
                         {currentList.map((item, itemIndex) => (
-                            <li key={itemIndex} className="text-gray-700 dark:text-gray-300 flex items-start gap-2">
-                                <span className="text-blue-600 dark:text-blue-400 mt-1.5">•</span>
+                            <li key={itemIndex} className="text-lg text-gray-700 dark:text-gray-300 flex items-start gap-2">
+                                <span className="text-blue-600 dark:text-blue-400 mt-1.5 text-xl">•</span>
                                 <span>{parseInlineMarkdown(item)}</span>
                             </li>
                         ))}
@@ -153,7 +160,7 @@ function parseMarkdown(text: string): React.ReactNode[] {
                 inList = false;
             }
             elements.push(
-                <p key={index} className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3 last:mb-0">
+                <p key={index} className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4 last:mb-0">
                     {parseInlineMarkdown(trimmedLine)}
                 </p>
             );
@@ -178,27 +185,60 @@ function parseMarkdown(text: string): React.ReactNode[] {
 }
 
 export default function Card({ content, className = "" }: CardProps) {
-    const { type, data, title, icon, className: contentClassName } = content;
+    const {
+        type,
+        data,
+        title,
+        icon,
+        className: contentClassName,
+        imageClassName = "",
+        imageContainerClassName = "",
+        imageStyle = {},
+        imageFit = 'contain',
+        imageWidth = '100%',
+        imageHeight = 'auto'
+    } = content;
 
     const baseClasses = "bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300";
     const combinedClasses = `${baseClasses} ${className}`;
 
     if (type === 'image') {
+        // Default container styles - full image display
+        const defaultContainerClass = "w-full bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden flex items-center justify-center";
+        const defaultImageClass = `object-${imageFit} max-w-full max-h-full`;
+
+        // Combine custom classes with defaults
+        const finalContainerClass = imageContainerClassName
+            ? `${defaultContainerClass} ${imageContainerClassName}`
+            : defaultContainerClass;
+
+        const finalImageClass = imageClassName
+            ? `${defaultImageClass} ${imageClassName}`
+            : defaultImageClass;
+
+        // Combine inline styles
+        const finalImageStyle = {
+            width: imageWidth,
+            height: imageHeight,
+            ...imageStyle
+        };
+
         return (
             <div className={combinedClasses}>
                 {title && (
                     <div className="flex items-center gap-2 mb-4">
                         {icon && <span className="text-blue-600 dark:text-blue-400">{icon}</span>}
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                             {title}
                         </h3>
                     </div>
                 )}
-                <div className="w-full h-48 bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden">
+                <div className={finalContainerClass}>
                     <img
                         src={data}
                         alt={title || "Hình ảnh"}
-                        className="w-full h-full object-cover"
+                        className={finalImageClass}
+                        style={finalImageStyle}
                         onError={(e) => {
                             const target = e.target as HTMLImageElement;
                             target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNFNUU1RTUiLz48dGV4dCB4PSIxMDAiIHk9IjEwMCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjOUFBOUE5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNtZW0iPkhpbmggxJHhuqNpPC90ZXh0Pjwvc3ZnPg==';

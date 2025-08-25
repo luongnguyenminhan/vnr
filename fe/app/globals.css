@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-inter: 'Inter', sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,7 +24,12 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter);
+  line-height: 1.6;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* React Icons styling */
@@ -123,34 +130,46 @@ svg {
 /* Markdown prose styles */
 .prose {
   color: inherit;
+  font-family: var(--font-inter);
 }
 
 .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
   color: inherit;
   margin-top: 0;
   margin-bottom: 0.5rem;
+  font-family: var(--font-inter);
+}
+
+.prose p {
+  font-family: var(--font-inter);
+  line-height: 1.7;
 }
 
 .prose ul {
   margin: 0.5rem 0;
   padding-left: 1rem;
+  font-family: var(--font-inter);
 }
 
 .prose li {
   margin: 0.25rem 0;
+  font-family: var(--font-inter);
 }
 
 .prose a {
   color: inherit;
   text-decoration: underline;
+  font-family: var(--font-inter);
 }
 
 .prose strong {
   font-weight: 600;
+  font-family: var(--font-inter);
 }
 
 .prose em {
   font-style: italic;
+  font-family: var(--font-inter);
 }
 
 .prose del {
@@ -159,4 +178,12 @@ svg {
 
 .prose br {
   margin: 0.25rem 0;
+}
+
+/* Vietnamese text optimizations */
+.prose {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "cv02" 1, "cv03" 1, "cv04" 1, "cv11" 1;
 }
