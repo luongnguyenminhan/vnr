@@ -1,6 +1,6 @@
 'use client';
 
-import { FiAlertTriangle, FiBarChart, FiBook, FiGlobe, FiHeart, FiHome, FiImage, FiShield, FiTarget, FiTrendingUp } from 'react-icons/fi';
+import { FiBarChart, FiBook, FiGlobe, FiHeart, FiHome, FiImage, FiShield, FiTarget, FiTrendingUp } from 'react-icons/fi';
 import Card from '../ui/Card';
 
 export default function ChapterIII() {
@@ -47,7 +47,7 @@ export default function ChapterIII() {
             data: `- Các "nhà vô địch" nội địa phát triển năng lực thiết kế, tích hợp, xuất khẩu dịch vụ.\n- Từ lắp ráp sang thiết kế một số sản phẩm dân dụng.`
         },
         { type: 'image' as const, title: 'Phòng thí nghiệm phát triển sản phẩm công nghệ tại doanh nghiệp Việt', icon: <FiImage className="w-6 h-6" />, className: 'col-span-6', data: 'https://yaskawavn.com/data/upload/YASKAWA_866%20(2)(2).jpg' },
-        
+
         { type: 'image' as const, title: 'Không gian co-working / vườn ươm startup công nghệ', icon: <FiImage className="w-6 h-6" />, className: 'col-span-12', data: 'https://cafefcdn.com/2019/1/10/khong-gian-co-working-len-toi-1000m2-tai-rehoboth-1547115772299445413879.jpg' },
         {
             type: 'text' as const,
