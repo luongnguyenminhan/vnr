@@ -1,285 +1,126 @@
 'use client';
 
-import { FiBook, FiHeart, FiHome, FiShield, FiTarget, FiTrendingUp, FiBarChart, FiRefreshCw, FiGlobe } from 'react-icons/fi';
+import { FiAlertTriangle, FiBarChart, FiBook, FiGlobe, FiHeart, FiHome, FiImage, FiShield, FiTarget, FiTrendingUp } from 'react-icons/fi';
 import Card from '../ui/Card';
 
 export default function ChapterIII() {
-    // Card data structure
+    // Card data structure for Phần III: Cơ đồ, tiềm lực, vị thế và uy tín
     const cardsData = [
-        // Header card (spans 12 columns)
         {
             type: 'text' as const,
-            data: `# Chương IV: Tổng Hợp và Đối Chiếu - Sự Khác Biệt Giữa Hai Giai Đoạn Lịch Sử
-
-## Đối Chiếu Hai Giai Đoạn
-
-Sự đối chiếu giữa hai giai đoạn lịch sử là cách trực quan nhất để nhận thấy sự phát triển vượt bậc của Việt Nam. Bảng dưới đây tóm tắt những khác biệt cơ bản giữa thời kỳ Bao cấp và thời kỳ Đổi mới.`,
-            title: "Tổng Quan Chương IV",
-            icon: <FiBook className="w-5 h-5" />,
-            className: "col-span-12"
+            title: 'Phần III — Thành tựu sau Đổi mới',
+            icon: <FiBook className="w-6 h-6" />,
+            className: 'col-span-12 text-2xl leading-relaxed',
+            data: `# Phần III — Cơ đồ, Tiềm lực, Vị thế và Uy tín (Chi tiết)\n\n**Mở đầu tóm tắt:** Trình bày 4 chuyển biến cốt lõi sau gần bốn thập kỷ Đổi mới: (1) Quy mô & chất lượng kinh tế; (2) Tiềm lực khoa học–công nghệ & sản xuất; (3) Phúc lợi xã hội & nguồn nhân lực; (4) Vị thế & uy tín quốc tế qua hội nhập và đóng góp. Mỗi mục kèm *tiêu đề ảnh minh họa* hỗ trợ soạn thảo báo cáo / slide.`
         },
-
-        // Comparison Table (spans 12 columns)
+        // 3.1 (split sub-sections)
         {
             type: 'text' as const,
-            data: `## Bảng So Sánh Chi Tiết
-
-| Chỉ số | Thời kỳ Bao cấp (1986) | Thời kỳ Đổi mới (2022-2024) |
-|--------|------------------------|-----------------------------|
-| **Lạm phát** | 774,7% | Ổn định ở mức thấp |
-| **Quy mô kinh tế** | ~ 26,88 tỷ USD | ~ 409 tỷ USD (2022) |
-| **GDP bình quân đầu người** | Thấp (Vài trăm USD đầu 90s) | 4.110 USD (2022), dự kiến 4.622,54 USD (2024) |
-| **Tỷ lệ nghèo** | Cao (>58% năm 1993) | Giảm mạnh (2,23% năm 2021) |
-| **Chỉ số HDI** | Thuộc nhóm Trung bình | Thuộc nhóm Cao |
-| **Vai trò quốc tế** | Cô lập, thiếu thốn | Đóng vai trò dẫn dắt trong ASEAN, có tiếng nói tại Liên Hợp Quốc |`,
-            title: "Bảng Đối Chiếu",
-            icon: <FiBarChart className="w-5 h-5" />,
-            className: "col-span-12"
+            title: '3.1.1. Mở rộng quy mô & cải thiện thu nhập',
+            icon: <FiTrendingUp className="w-6 h-6" />,
+            className: 'col-span-4 text-xl leading-relaxed',
+            data: `- Quy mô GDP tăng mạnh (1985 → 2024).\n- Thu nhập bình quân đầu người cải thiện; hình thành tầng lớp trung lưu đô thị.`
         },
-
-        // Economic Comparison (spans 6 columns)
+        { type: 'image' as const, title: 'Biểu đồ tăng trưởng GDP 1985–2024 (giá thực)', icon: <FiImage className="w-6 h-6" />, className: 'col-span-8', data: 'https://media.vneconomy.vn/images/upload/2025/01/17/anh-t20-1.png' },
         {
             type: 'text' as const,
-            data: `## So Sánh Về Kinh Tế
-
-### Lạm Phát
-- **Bao cấp (1986):** 774,7%
-- **Đổi mới (2022-2024):** Ổn định, thấp
-- **Sự khác biệt:** Từ siêu lạm phát sang ổn định
-
-### Quy Mô GDP
-- **Bao cấp:** 26,88 tỷ USD
-- **Đổi mới:** 409 tỷ USD
-- **Sự khác biệt:** Tăng 15 lần
-
-### GDP Bình Quân
-- **Bao cấp:** Vài trăm USD
-- **Đổi mới:** 4.110 USD (2022)
-- **Sự khác biệt:** Tăng 38 lần
-
-### Tăng Trưởng
-- **Bao cấp:** Trì trệ, không phát triển
-- **Đổi mới:** 7% mỗi năm`,
-            title: "So Sánh Kinh Tế",
-            icon: <FiTrendingUp className="w-5 h-5" />,
-            className: "col-span-6"
+            title: '3.1.2. Cơ cấu chuyển dịch công nghiệp hóa – dịch vụ hóa',
+            icon: <FiBarChart className="w-6 h-6" />,
+            className: 'col-span-4 text-xl leading-relaxed',
+            data: `- Tỉ trọng công nghiệp & dịch vụ tăng; nổi bật chế biến chế tạo, logistics, tài chính, CNTT.\n- Tham gia sâu chuỗi giá trị; gia tăng hàm lượng giá trị gia tăng.`
         },
-
-        // Social Comparison (spans 6 columns)
+        { type: 'image' as const, title: 'Chuỗi sản xuất điện tử: từ linh kiện đến sản phẩm hoàn chỉnh', icon: <FiImage className="w-6 h-6" />, className: 'col-span-8', data: 'https://etdvietnam.com/upload/images/bai-viet/Linh-Kien1.jpg' },
         {
             type: 'text' as const,
-            data: `## So Sánh Về Xã Hội
-
-### Tỷ Lệ Nghèo
-- **Bao cấp (1993):** 58% hộ nghèo
-- **Đổi mới (2021):** 2,23% hộ nghèo
-- **Sự khác biệt:** Giảm 55,77 điểm phần trăm
-
-### Nghèo Cùng Cực
-- **Bao cấp (1990s):** 40%
-- **Đổi mới (2020):** Dưới 5%
-- **Sự khác biệt:** Giảm 35 điểm phần trăm
-
-### Chỉ Số HDI
-- **Bao cấp:** Nhóm Trung bình
-- **Đổi mới:** Nhóm Cao
-- **Sự khác biệt:** Thăng hạng
-
-### Chất Lượng Đời Sống
-- **Bao cấp:** Thiếu thốn, xếp hàng
-- **Đổi mới:** Sung túc, tự do mua sắm`,
-            title: "So Sánh Xã Hội",
-            icon: <FiHome className="w-5 h-5" />,
-            className: "col-span-6"
+            title: '3.1.3. Ngoại thương & thu hút vốn nước ngoài',
+            icon: <FiGlobe className="w-6 h-6" />,
+            className: 'col-span-6 text-xl leading-relaxed',
+            data: `- Kim ngạch xuất–nhập khẩu quy mô lớn (~700 tỷ USD).\n- FDI duy trì ổn định, bổ sung công nghệ, việc làm, kỹ năng.`
         },
-
-        // International Comparison (spans 8 columns)
+        { type: 'image' as const, title: 'Cảng container hiện đại và luồng hàng xuất khẩu', icon: <FiImage className="w-6 h-6" />, className: 'col-span-6', data: 'https://bcp.cdnchinhphu.vn/334894974524682240/2023/6/25/dong-tam-16876335238351735289292.jpg' },
+        // 3.2 (split sub-sections)
         {
             type: 'text' as const,
-            data: `## So Sánh Về Quốc Tế
-
-### Vị Thế Thương Mại
-- **Bao cấp:** Đóng cửa, cô lập
-- **Đổi mới:** Top 22 thế giới, đối tác lớn
-
-### Vai Trò Ngoại Giao
-- **Bao cấp:** Thiếu thốn, hạn chế
-- **Đổi mới:** Dẫn dắt ASEAN, có tiếng nói LHQ
-
-### Uy Tín Quốc Tế
-- **Bao cấp:** Thấp, không được công nhận
-- **Đổi mới:** Thăng hạng mạnh về thương hiệu
-
-### Hội Nhập
-- **Bao cấp:** Khép kín, hạn chế
-- **Đổi mới:** Ký nhiều FTA, hội nhập sâu
-
-### Chỉ Số Hạnh Phúc
-- **Bao cấp:** Không có dữ liệu
-- **Đổi mới:** Top 46/2025, tăng mạnh`,
-            title: "So Sánh Quốc Tế",
-            icon: <FiGlobe className="w-5 h-5" />,
-            className: "col-span-8"
+            title: '3.2.1. Doanh nghiệp nòng cốt & Make-in-Vietnam',
+            icon: <FiBarChart className="w-6 h-6" />,
+            className: 'col-span-6 text-xl leading-relaxed',
+            data: `- Các "nhà vô địch" nội địa phát triển năng lực thiết kế, tích hợp, xuất khẩu dịch vụ.\n- Từ lắp ráp sang thiết kế một số sản phẩm dân dụng.`
         },
-
-        // System Comparison (spans 4 columns)
+        { type: 'image' as const, title: 'Phòng thí nghiệm phát triển sản phẩm công nghệ tại doanh nghiệp Việt', icon: <FiImage className="w-6 h-6" />, className: 'col-span-6', data: 'https://yaskawavn.com/data/upload/YASKAWA_866%20(2)(2).jpg' },
+        
+        { type: 'image' as const, title: 'Không gian co-working / vườn ươm startup công nghệ', icon: <FiImage className="w-6 h-6" />, className: 'col-span-12', data: 'https://cafefcdn.com/2019/1/10/khong-gian-co-working-len-toi-1000m2-tai-rehoboth-1547115772299445413879.jpg' },
         {
             type: 'text' as const,
-            data: `## So Sánh Về Hệ Thống
-
-### Kinh Tế
-- **Bao cấp:** Kế hoạch hóa tập trung
-- **Đổi mới:** Thị trường định hướng XHCN
-
-### Quản Lý
-- **Bao cấp:** Quan liêu, cồng kềnh
-- **Đổi mới:** Linh hoạt, hiệu quả
-
-### Quyền Tự Do
-- **Bao cấp:** Hạn chế
-- **Đổi mới:** Được đảm bảo
-
-### Tiềm Năng
-- **Bao cấp:** Bị kìm hãm
-- **Đổi mới:** Được giải phóng`,
-            title: "So Sánh Hệ Thống",
-            icon: <FiShield className="w-5 h-5" />,
-            className: "col-span-4"
+            title: '3.2.2. Hệ sinh thái đổi mới sáng tạo & startup',
+            icon: <FiGlobe className="w-6 h-6" />,
+            className: 'col-span-12 text-xl leading-relaxed',
+            data: `- Vườn ươm, quỹ VC, trung tâm đổi mới thúc đẩy thương mại hóa.\n- Giáo dục STEM, kỹ năng số hỗ trợ kinh tế tri thức.`
         },
-
-        // Transformation Evidence (spans 12 columns)
         {
             type: 'text' as const,
-            data: `## Minh Chứng Cho Sự Chuyển Mình
-
-Sự khác biệt về mặt số liệu cho thấy một quá trình chuyển mình mang tính lịch sử. Từ một nền kinh tế bị bóp nghẹt bởi cơ chế tập trung, phụ thuộc hoàn toàn vào hệ thống phân phối và tem phiếu, người dân Việt Nam ngày nay được sống trong một nền kinh tế năng động, thịnh vượng, với quyền tự do mua sắm và kinh doanh được đảm bảo.
-
-Từ một quốc gia vừa gượng dậy sau chiến tranh, thiếu thốn và cô lập, Việt Nam đã vươn lên trở thành một quốc gia có tiếng nói, đóng góp tích cực vào các vấn đề khu vực và toàn cầu.`,
-            title: "Minh Chứng Chuyển Mình",
-            icon: <FiRefreshCw className="w-5 h-5" />,
-            className: "col-span-12"
+            title: '3.2.3. Chuyển đổi số & hạ tầng số quốc gia',
+            icon: <FiTrendingUp className="w-6 h-6" />,
+            className: 'col-span-12 md:col-span-8 text-xl leading-relaxed',
+            data: `- Hạ tầng viễn thông, nền tảng số thúc đẩy TMĐT, thanh toán số, chính phủ số.\n- Hệ sinh thái dữ liệu & an ninh mạng củng cố nền kinh tế số.`
         },
-
-        // Key Differences (spans 6 columns)
+        { type: 'image' as const, title: 'Trung tâm dữ liệu và hạ tầng viễn thông hiện đại', icon: <FiImage className="w-6 h-6" />, className: 'col-span-12 md:col-span-4', data: 'https://htv.mediacdn.vn/thumb_w/640/155334506109014016/2025/8/20/fpt-25-175568045218154670959.jpg' },
+        // 3.3 (split sub-sections)
         {
             type: 'text' as const,
-            data: `## Những Khác Biệt Cốt Lõi
-
-### Tư Duy
-- **Bao cấp:** Ổn định, bảo thủ
-- **Đổi mới:** Đổi mới, sáng tạo
-
-### Phương Pháp
-- **Bao cấp:** Tập trung, mệnh lệnh
-- **Đổi mới:** Phân tán, thị trường
-
-### Quan Hệ
-- **Bao cấp:** Phụ thuộc vào phân phối
-- **Đổi mới:** Tự chủ, tự do
-
-### Tiềm Năng
-- **Bao cấp:** Bị kìm hãm
-- **Đổi mới:** Được khơi dậy
-
-### Tương Lai
-- **Bao cấp:** Bế tắc
-- **Đổi mới:** Mở rộng, phát triển
-
-### Tâm Lý Xã Hội
-- **Bao cấp:** Lo lắng, bất an
-- **Đổi mới:** Tự tin, lạc quan`,
-            title: "Khác Biệt Cốt Lõi",
-            icon: <FiTarget className="w-5 h-5" />,
-            className: "col-span-12"
+            title: '3.3.1. Phúc lợi cơ bản & giảm nghèo',
+            icon: <FiHome className="w-6 h-6" />,
+            className: 'col-span-12 text-xl leading-relaxed',
+            data: `- Tỷ lệ nghèo giảm sâu; chính sách kinh tế gắn an sinh.\n- Mở rộng y tế cơ sở, tăng tỷ lệ hoàn thành giáo dục cơ bản.`
         },
-
-        // Detailed Comparison (spans 12 columns)
+        { type: 'image' as const, title: 'Lớp học STEM', icon: <FiImage className="w-6 h-6" />, className: 'col-span-5', data: 'https://smk.edu.vn/wp-content/uploads/2024/01/Loi-ich-cua-STEAM-voi-mam-non-2.jpeg' },
+        { type: 'image' as const, title: 'Trạm y tế xã hiện đại', icon: <FiImage className="w-6 h-6" />, className: 'col-span-7', data: 'https://thainguyen.gov.vn/image/journal/article?img_id=14118849&t=1756078041340' },
         {
             type: 'text' as const,
-            data: `## Bảng So Sánh Chi Tiết Mở Rộng
-
-| **Chỉ số** | **Thời kỳ Bao cấp (1986)** | **Thời kỳ Đổi mới (2022-2024)** |
-|------------|----------------------------|----------------------------------|
-| **Lạm phát** | 774,7% | Ổn định ở mức thấp |
-| **Quy mô kinh tế** | ~26,88 tỷ USD | ~409 tỷ USD (tăng 15 lần) |
-| **GDP bình quân đầu người** | Vài trăm USD | 4.110 USD (tăng 38 lần) |
-| **Tỷ lệ nghèo** | 58% hộ nghèo (1993) | 2,23% hộ nghèo (2021) |
-| **Chỉ số HDI** | Nhóm Trung bình | Nhóm Cao |
-| **Vai trò quốc tế** | Cô lập, thiếu thốn | Dẫn dắt ASEAN, có tiếng nói LHQ |
-| **Hệ thống kinh tế** | Kế hoạch hóa tập trung | Thị trường định hướng XHCN |
-| **Tình trạng hàng hóa** | Thiếu hụt trầm trọng | Dồi dào, đa dạng |
-| **Tự do mua sắm** | Tem phiếu, phân phối | Tự do, siêu thị |
-| **Tâm lý người dân** | Lo lắng, bất an | Tự tin, lạc quan |`,
-            title: "Bảng So Sánh Mở Rộng",
-            icon: <FiBarChart className="w-5 h-5" />,
-            className: "col-span-12"
+            title: '3.3.2. Chất lượng nguồn nhân lực',
+            icon: <FiHeart className="w-6 h-6" />,
+            className: 'col-span-12 md:col-span-8 text-xl leading-relaxed',
+            data: `- Dịch chuyển sang lao động kỹ năng cao; đầu tư đào tạo nghề & đại học.\n- Tầng lớp trung lưu gia tăng tạo động lực tiêu dùng & đổi mới.`
         },
-
-        // Impact on People (spans 6 columns)
+        { type: 'image' as const, title: 'Sinh viên kỹ thuật làm thí nghiệm tại phòng lab', icon: <FiImage className="w-6 h-6" />, className: 'col-span-12 md:col-span-4', data: 'https://daihoc.fpt.edu.vn/wp-content/uploads/2023/04/trai-nghiem-thu-vi-tai-truong-cong-nghe-dh-fpt_1-1024x728.jpeg' },
+        // 3.4
         {
             type: 'text' as const,
-            data: `## Tác Động Đến Người Dân
-
-### Đời Sống Hàng Ngày
-- **Bao cấp:** Tem phiếu, sổ gạo, xếp hàng
-- **Đổi mới:** Tự do mua sắm, siêu thị
-
-### Cơ Hội
-- **Bao cấp:** Hạn chế, thiếu thốn
-- **Đổi mới:** Mở rộng, phong phú
-
-### Tâm Lý
-- **Bao cấp:** Lo lắng, bất an
-- **Đổi mới:** Tự tin, lạc quan
-
-### Khát Vọng
-- **Bao cấp:** Sinh tồn
-- **Đổi mới:** Phát triển, thịnh vượng
-
-### Tôn Trọng
-- **Bao cấp:** Thấp (đối với hệ thống)
-- **Đổi mới:** Cao (đối với thành quả)`,
-            title: "Tác Động Đến Người Dân",
-            icon: <FiHeart className="w-5 h-5" />,
-            className: "col-span-5"
+            title: '3.4. An ninh quốc phòng & tự chủ chiến lược',
+            icon: <FiShield className="w-6 h-6" />,
+            className: 'col-span-12 md:col-span-8 text-xl leading-relaxed',
+            data: `### 3.4.1. Hiện đại hóa & cân bằng phát triển\n- Nâng cao năng lực phòng thủ, công nghiệp quốc phòng hỗ trợ chủ quyền.\n- Quản trị rủi ro địa chính trị bảo đảm môi trường ổn định cho phát triển.`
         },
-
-        // Image placeholders
-        {
-            type: 'image' as const,
-            data: 'https://hnm.1cdn.vn/2016/11/13/hanoimoi.com.vn-uploads-album-20161113-_72057346-88c1-4140-ac13-9675a54fe63c.jpg',
-            title: "Thời kỳ bao cấp",
-            icon: <FiHome className="w-5 h-5" />,
-            className: "col-span-7"
-        },
-        {
-            type: 'image' as const,
-            data: 'https://icdn.dantri.com.vn/thumb_w/960/2019/08/30/giao-thong-ha-noi-1567142314122.jpg',
-            title: "Thời kỳ đổi mới",
-            icon: <FiTrendingUp className="w-5 h-5" />,
-            className: "col-span-6"
-        },
-        {
-            type: 'image' as const,
-            data: 'https://hn.ss.bfcplatform.vn/tckt/2021/05/21A05006-2.jpg',
-            title: "Việt Nam hiện đại",
-            icon: <FiGlobe className="w-5 h-5" />,
-            className: "col-span-6"
-        },
-
-        // Conclusion (spans 12 columns)
+        { type: 'image' as const, title: 'Vận hành hệ thống thông tin liên lạc quân sự nội địa', icon: <FiImage className="w-6 h-6" />, className: 'col-span-12 md:col-span-4', data: 'https://file3.qdnd.vn/data/images/0/2024/07/20/upload_2134/1%2014.jpg?w=400' },
+        // 3.5 (split sub-sections)
         {
             type: 'text' as const,
-            data: `## Kết Luận Sự Đối Chiếu
-
-Sự thăng hạng về danh tiếng trên các bảng xếp hạng quốc tế về kinh doanh, ngoại giao và chỉ số hạnh phúc là minh chứng không thể chối cãi cho sự gia tăng "uy tín" và "vị thế" của đất nước.
-
-Sự khác biệt này không chỉ là một sự so sánh lịch sử, mà còn là nền tảng để trân trọng những giá trị hiện đại và tiếp tục vững bước trên con đường phát triển. Việt Nam hôm nay là kết quả của sự nỗ lực, quyết tâm và tầm nhìn chiến lược của một dân tộc kiên cường, đã và đang làm nên những điều phi thường.
-
-Những câu chuyện về sổ gạo và tem phiếu không chỉ là ký ức về sự khó khăn, mà còn là lời nhắc nhở mạnh mẽ về sự phụ thuộc và thiếu tự chủ. Ngược lại, những con số ấn tượng về tăng trưởng GDP, giảm nghèo, và thăng hạng trên trường quốc tế là minh chứng sống động cho sự tự do, thịnh vượng và uy tín của Việt Nam hiện tại.`,
-            title: "Kết Luận Đối Chiếu",
-            icon: <FiShield className="w-5 h-5" />,
-            className: "col-span-12"
+            title: '3.5.1. Hội nhập đa phương & FTA',
+            icon: <FiGlobe className="w-6 h-6" />,
+            className: 'col-span-12 md:col-span-8 text-xl leading-relaxed',
+            data: `- Tham gia WTO, CPTPP, EVFTA, nhiều FTA → mở rộng thị trường & cải cách thể chế.\n- Nâng vị thế địa-kinh tế trong ASEAN & Châu Á–TBD.`
+        },
+        { type: 'image' as const, title: 'Lễ ký hiệp định thương mại tự do — bàn ký & cờ các bên', icon: <FiImage className="w-6 h-6" />, className: 'col-span-12 md:col-span-4', data: 'https://file3.qdnd.vn/data/images/0/2023/07/25/nguyenthao/vifta.jpeg?dpi=150&quality=100&w=870' },
+        {
+            type: 'text' as const,
+            title: '3.5.2. Ngoại giao chủ động & đóng góp toàn cầu',
+            icon: <FiTarget className="w-6 h-6" />,
+            className: 'col-span-4 text-xl leading-relaxed',
+            data: `- Tham gia cơ chế LHQ, gìn giữ hòa bình, đề xuất sáng kiến.\n- Ngoại giao kinh tế & văn hóa xây dựng uy tín mềm.`
+        },
+        { type: 'image' as const, title: 'Đoàn đại biểu phát biểu tại Đại hội đồng LHQ', icon: <FiImage className="w-6 h-6" />, className: 'col-span-8', data: 'https://bcp.cdnchinhphu.vn/zoom/600_315/334894974524682240/2024/9/25/vnapotaltongbithuchutichnuocphatbieutaiphienthaoluanchungcapcaodaihoidonglienhopquockhoa79stand-17272218104191789735435-5-0-421-665-crop-1727221914396349842391.jpg' },
+        // 3.6
+        // 3.7 Conclusion
+        {
+            type: 'text' as const,
+            title: '3.7. Kết luận nội phần',
+            icon: <FiHeart className="w-6 h-6" />,
+            className: 'col-span-12 text-2xl leading-relaxed',
+            data: `## Kết luận\nTổng hòa: 
+            (1) Quy mô kinh tế mở rộng & cơ cấu chuyển dịch; 
+            (2) Tiềm lực khoa học–công nghệ tăng; 
+            (3) Phúc lợi & nguồn nhân lực cải thiện; 
+            (4) Tự chủ chiến lược nhất định; 
+            (5) Vị thế quốc tế cao hơn qua hội nhập & ngoại giao chủ động.\n\n> **“Đất nước ta chưa bao giờ có được cơ đồ, tiềm lực, vị thế và uy tín quốc tế như ngày nay.”**\n\nĐây là nhận định dựa trên bằng chứng liên ngành và cũng là lời nhắc cần củng cố thành tựu bằng chính sách dài hạn, phát triển bền vững & nâng cao sức chống chịu.`
         }
     ];
 
@@ -292,7 +133,7 @@ Những câu chuyện về sổ gạo và tem phiếu không chỉ là ký ức 
                         <Card
                             key={index}
                             content={cardData}
-                            className={cardData.className || ""}
+                            className={cardData.className || ''}
                         />
                     ))}
                 </div>

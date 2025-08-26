@@ -12,7 +12,7 @@ interface HeaderProps {
     onChapterChange?: (chapter: ChapterType) => void;
 }
 
-export default function Header({ title = "VNR AI Assistant", showNavigation = true, onChapterChange }: HeaderProps) {
+export default function Header({ title = "Việt Nam thời Bao Cấp", showNavigation = true, onChapterChange }: HeaderProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -20,10 +20,10 @@ export default function Header({ title = "VNR AI Assistant", showNavigation = tr
     };
 
     const navigation = [
-        { name: 'Landing', href: 'Landing' as ChapterType, icon: FiBook, isChapter: true },
-        { name: 'Chapter I', href: 'ChapterI' as ChapterType, icon: FiBook, isChapter: true },
-        { name: 'Chapter II', href: 'ChapterII' as ChapterType, icon: FiBook, isChapter: true },
-        { name: 'Chapter III', href: 'ChapterIII' as ChapterType, icon: FiBook, isChapter: true },
+        { name: 'Mở đầu', href: 'Landing' as ChapterType, icon: FiBook, isChapter: true },
+        { name: 'Phần I', href: 'ChapterI' as ChapterType, icon: FiBook, isChapter: true },
+        { name: 'Phần II', href: 'ChapterII' as ChapterType, icon: FiBook, isChapter: true },
+        { name: 'Phần III', href: 'ChapterIII' as ChapterType, icon: FiBook, isChapter: true },
     ];
 
     return (
@@ -40,7 +40,7 @@ export default function Header({ title = "VNR AI Assistant", showNavigation = tr
                                 {title}
                             </h1>
                             <div className="text-xs text-gray-500 dark:text-gray-400">
-                                Trợ lý trò chuyện được hỗ trợ bởi AI
+                                So sánh Việt Nam thời bao cấp và ngày nay
                             </div>
                         </div>
                     </Link>

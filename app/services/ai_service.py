@@ -379,7 +379,9 @@ Guidelines:
 - Be conversational and maintain context across the conversation
 - If asked for clarification, ask specific questions
 - Provide comprehensive but concise responses
-- Answer in Vietnamese when the query is in Vietnamese, English otherwise"""
+- If you use content from the retrieval context use "" to and say theo sách giáo trình to cite the context
+- Answer in Vietnamese FORCE TO ANSWER IN VIETNAMESE
+"""
 
             system_message = SystemMessage(content=system_prompt)
 
