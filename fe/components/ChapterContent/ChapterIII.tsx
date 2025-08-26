@@ -11,7 +11,7 @@ export default function ChapterIII() {
             title: 'Phần III — Thành tựu sau Đổi mới',
             icon: <FiBook className="w-6 h-6" />,
             className: 'col-span-12 text-2xl leading-relaxed',
-            data: `# Phần III — Cơ đồ, Tiềm lực, Vị thế và Uy tín (Chi tiết)\n\n**Mở đầu tóm tắt:** Trình bày 4 chuyển biến cốt lõi sau gần bốn thập kỷ Đổi mới: (1) Quy mô & chất lượng kinh tế; (2) Tiềm lực khoa học–công nghệ & sản xuất; (3) Phúc lợi xã hội & nguồn nhân lực; (4) Vị thế & uy tín quốc tế qua hội nhập và đóng góp. Mỗi mục kèm *tiêu đề ảnh minh họa* hỗ trợ soạn thảo báo cáo / slide.`
+            data: `# Phần III — Cơ đồ, Tiềm lực, Vị thế và Uy tín (Chi tiết)\n\n**Mở đầu tóm tắt:** Trình bày 4 chuyển biến cốt lõi sau gần bốn thập kỷ Đổi mới: (1) Quy mô & chất lượng kinh tế; (2) Tiềm lực khoa học–công nghệ & sản xuất; (3) Phúc lợi xã hội & nguồn nhân lực; (4) Vị thế & uy tín quốc tế qua hội nhập và đóng góp.`
         },
         // 3.1 (split sub-sections)
         {
@@ -112,7 +112,7 @@ export default function ChapterIII() {
         // 3.7 Conclusion
         {
             type: 'text' as const,
-            title: '3.7. Kết luận nội phần',
+            title: '3.6. Kết luận',
             icon: <FiHeart className="w-6 h-6" />,
             className: 'col-span-12 text-2xl leading-relaxed',
             data: `## Kết luận\nTổng hòa: 

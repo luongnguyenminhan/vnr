@@ -208,22 +208,6 @@ Trước khi chính thức khởi xướng công cuộc Đổi mới tại Đạ
             title: "Kết Luận Chương II",
             icon: <FiHeart className="w-6 h-6" />,
             className: "col-span-12 text-2xl leading-relaxed"
-        },
-
-        // Final images
-        {
-            type: 'image' as const,
-            data: 'https://icdn.dantri.com.vn/thumb_w/1280/2019/08/30/cho-dong-xuan-1567142313803.jpg',
-            title: "Việt Nam sau Đổi mới - Phát triển vượt bậc",
-            icon: <FiTarget className="w-6 h-6" />,
-            className: "col-span-12 md:col-span-6"
-        },
-        {
-            type: 'image' as const,
-            data: 'https://icdn.dantri.com.vn/thumb_w/1280/2019/08/30/boc-xep-gao-1567142313828.jpg',
-            title: "Tương lai phát triển bền vững",
-            icon: <FiAward className="w-6 h-6" />,
-            className: "col-span-12 md:col-span-6"
         }
     ];
 
