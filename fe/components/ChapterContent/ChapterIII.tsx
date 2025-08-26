@@ -190,7 +190,7 @@ Từ một quốc gia vừa gượng dậy sau chiến tranh, thiếu thốn và
 - **Đổi mới:** Tự tin, lạc quan`,
             title: "Khác Biệt Cốt Lõi",
             icon: <FiTarget className="w-5 h-5" />,
-            className: "col-span-6"
+            className: "col-span-12"
         },
 
         // Detailed Comparison (spans 12 columns)
@@ -241,30 +241,30 @@ Từ một quốc gia vừa gượng dậy sau chiến tranh, thiếu thốn và
 - **Đổi mới:** Cao (đối với thành quả)`,
             title: "Tác Động Đến Người Dân",
             icon: <FiHeart className="w-5 h-5" />,
-            className: "col-span-6"
+            className: "col-span-5"
         },
 
         // Image placeholders
         {
             type: 'image' as const,
-            data: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop',
+            data: 'https://hnm.1cdn.vn/2016/11/13/hanoimoi.com.vn-uploads-album-20161113-_72057346-88c1-4140-ac13-9675a54fe63c.jpg',
             title: "Thời kỳ bao cấp",
             icon: <FiHome className="w-5 h-5" />,
-            className: "col-span-4"
+            className: "col-span-7"
         },
         {
             type: 'image' as const,
-            data: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
+            data: 'https://icdn.dantri.com.vn/thumb_w/960/2019/08/30/giao-thong-ha-noi-1567142314122.jpg',
             title: "Thời kỳ đổi mới",
             icon: <FiTrendingUp className="w-5 h-5" />,
-            className: "col-span-4"
+            className: "col-span-6"
         },
         {
             type: 'image' as const,
-            data: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop',
+            data: 'https://hn.ss.bfcplatform.vn/tckt/2021/05/21A05006-2.jpg',
             title: "Việt Nam hiện đại",
             icon: <FiGlobe className="w-5 h-5" />,
-            className: "col-span-4"
+            className: "col-span-6"
         },
 
         // Conclusion (spans 12 columns)
@@ -287,7 +287,7 @@ Những câu chuyện về sổ gạo và tem phiếu không chỉ là ký ức 
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex justify-center items-center">
             <div className="w-[70%] py-4">
                 {/* 12-column grid container */}
-                <div className="grid grid-cols-12 gap-4 auto-rows-fr">
+                <div className="grid grid-cols-12 gap-4 auto-rows-min">
                     {cardsData.map((cardData, index) => (
                         <Card
                             key={index}

@@ -65,14 +65,14 @@ Trước khi chính thức khởi xướng công cuộc Đổi mới tại Đạ
             data: 'https://i-kinhdoanh.vnecdn.net/2016/12/15/mua-hang-thoi-bao-cap-0-9267-1481774665.jpg',
             title: "Khủng hoảng kinh tế thập niên 1980",
             icon: <FiTrendingUp className="w-6 h-6" />,
-            className: "col-span-12 md:col-span-4"
+            className: "col-span-12 md:col-span-6"
         },
         {
             type: 'image' as const,
-            data: 'https://placehold.co/800x600/4CAF50/FFFFFF?text=Chỉ+Thị+100+1981',
+            data: 'https://dhtn.ttxvn.org.vn/Images/images/Boi%20Duong%20Nghiep%20Vu/Noi%20San%20Thong%20Tan/Nam%202021/So%206/NSTT/TR7_1.jpg',
             title: "Chỉ thị 100-CT/TW (1981) - Khoán sản phẩm",
             icon: <FiTarget className="w-6 h-6" />,
-            className: "col-span-12 md:col-span-6"
+            className: "col-span-12 md:col-span-12"
         },
         {
             type: 'text' as const,
@@ -95,7 +95,7 @@ Trước khi chính thức khởi xướng công cuộc Đổi mới tại Đạ
         },
         {
             type: 'image' as const,
-            data: 'https://placehold.co/800x600/4CAF50/FFFFFF?text=Hội+Nghị+Trung+Ương+6+1979',
+            data: 'https://file.qdnd.vn/data/images/0/2016/04/22/phucthang/22042016tcq01.jpg?w=578',
             title: "Hội nghị Trung ương 6 - Bước đầu đổi mới",
             icon: <FiRefreshCw className="w-6 h-6" />,
             className: "col-span-12 md:col-span-4"
@@ -120,7 +120,7 @@ Trước khi chính thức khởi xướng công cuộc Đổi mới tại Đạ
         },
         {
             type: 'image' as const,
-            data: 'https://placehold.co/800x600/FF9800/FFFFFF?text=Đổi+Mới+Tư+Duy',
+            data: 'https://imgcdn.tapchicongthuong.vn/tcct-media/23/11/3/dai-hoi-vi_6544e661b5222.jpg',
             title: "Đổi mới tư duy - Bước đột phá chiến lược",
             icon: <FiRefreshCw className="w-6 h-6" />,
             className: "col-span-12 md:col-span-4"
@@ -146,7 +146,7 @@ Trước khi chính thức khởi xướng công cuộc Đổi mới tại Đạ
         },
         {
             type: 'image' as const,
-            data: 'https://placehold.co/800x600/2196F3/FFFFFF?text=Nền+kinh+tế+hàng+hóa+nhiều+thành+phần',
+            data: 'https://imgcdn.tapchicongthuong.vn/thumb/w_1000/tcct-media/23/12/18/chuyen-giao-quyen-tu-chu-cho-cac-xi-nghiep-nhung-nam-1986-1995_657fb70499fa3.jpg',
             title: "Nền kinh tế hàng hóa nhiều thành phần",
             icon: <FiTrendingUp className="w-6 h-6" />,
             className: "col-span-12 md:col-span-6"
@@ -172,7 +172,7 @@ Trước khi chính thức khởi xướng công cuộc Đổi mới tại Đạ
         },
         {
             type: 'image' as const,
-            data: 'https://placehold.co/800x600/9C27B0/FFFFFF?text=Văn+Hóa+Việt+Nam+Tiên+Tiến',
+            data: 'https://hdll.vn/FileUpload/Images/bho.jpg',
             title: "Văn hóa Việt Nam tiên tiến, đậm đà bản sắc",
             icon: <FiHome className="w-6 h-6" />,
             className: "col-span-12 md:col-span-6"
@@ -213,14 +213,14 @@ Trước khi chính thức khởi xướng công cuộc Đổi mới tại Đạ
         // Final images
         {
             type: 'image' as const,
-            data: 'https://placehold.co/800x600/4CAF50/FFFFFF?text=Viet+Nam+Sau+Đoi+Moi',
+            data: 'https://icdn.dantri.com.vn/thumb_w/1280/2019/08/30/cho-dong-xuan-1567142313803.jpg',
             title: "Việt Nam sau Đổi mới - Phát triển vượt bậc",
             icon: <FiTarget className="w-6 h-6" />,
             className: "col-span-12 md:col-span-6"
         },
         {
             type: 'image' as const,
-            data: 'https://placehold.co/800x600/2196F3/FFFFFF?text=Tương+Lai+Phát+Triển+Bền+Vững',
+            data: 'https://icdn.dantri.com.vn/thumb_w/1280/2019/08/30/boc-xep-gao-1567142313828.jpg',
             title: "Tương lai phát triển bền vững",
             icon: <FiAward className="w-6 h-6" />,
             className: "col-span-12 md:col-span-6"
